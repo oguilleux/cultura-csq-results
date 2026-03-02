@@ -1,0 +1,27 @@
+# Page Group IDs
+# generated_at_utc: 2026-03-02T10:28:02Z
+# total: 23
+# format: id\tname\textra
+52514512	Homepage	mappingId=2066672;mapping=Reference mapping LVO 10/5/2023;category=Home
+52514544	Search results	mappingId=2066672;mapping=Reference mapping LVO 10/5/2023;category=Search
+52514592	Login	mappingId=2066672;mapping=Reference mapping LVO 10/5/2023;category=Form
+52516448	Account	mappingId=2066672;mapping=Reference mapping LVO 10/5/2023;category=My account
+52516464	Cart	mappingId=2066672;mapping=Reference mapping LVO 10/5/2023;category=Cart
+52516480	Checkout - delivery	mappingId=2066672;mapping=Reference mapping LVO 10/5/2023;category=Checkout
+52516512	Checkout - payment	mappingId=2066672;mapping=Reference mapping LVO 10/5/2023;category=Checkout
+52516640	PDP	mappingId=2066672;mapping=Reference mapping LVO 10/5/2023;category=Product
+52516704	UNIVERS	mappingId=2066672;mapping=Reference mapping LVO 10/5/2023;category=Category
+52516912	PLP	mappingId=2066672;mapping=Reference mapping LVO 10/5/2023;category=Category
+52517024	Thank you	mappingId=2066672;mapping=Reference mapping LVO 10/5/2023;category=Confirmation
+52517056	Store finder	mappingId=2066672;mapping=Reference mapping LVO 10/5/2023;category=Store locator
+52517104	Store info	mappingId=2066672;mapping=Reference mapping LVO 10/5/2023;category=Store locator
+52517120	Services	mappingId=2066672;mapping=Reference mapping LVO 10/5/2023;category=Information / legals
+52517136	Classes	mappingId=2066672;mapping=Reference mapping LVO 10/5/2023;category=Information / legals
+52517200	Password reset	mappingId=2066672;mapping=Reference mapping LVO 10/5/2023;category=Confirmation
+52517760	DIY and tutorials	mappingId=2066672;mapping=Reference mapping LVO 10/5/2023;category=Information / legals
+52517872	FAQ	mappingId=2066672;mapping=Reference mapping LVO 10/5/2023;category=Help / support
+52517904	Contact	mappingId=2066672;mapping=Reference mapping LVO 10/5/2023;category=Form
+52518016	Events	mappingId=2066672;mapping=Reference mapping LVO 10/5/2023;category=Information / legals
+52518128	PLP - selections	mappingId=2066672;mapping=Reference mapping LVO 10/5/2023;category=Category
+79066368	AJOUT PANIER	mappingId=2066672;mapping=Reference mapping LVO 10/5/2023;category=Cart
+79874216	UNIVERS CARE	mappingId=2066672;mapping=Reference mapping LVO 10/5/2023;category=Category
