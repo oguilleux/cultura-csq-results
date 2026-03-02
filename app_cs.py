@@ -28,6 +28,10 @@ try:
     from contentsquare_config import PAGE_GROUP_ID as CONFIG_PAGE_GROUP_ID
 except Exception:
     CONFIG_PAGE_GROUP_ID = None
+try:
+    from contentsquare_config import GOAL_IDS as CONFIG_GOAL_IDS
+except Exception:
+    CONFIG_GOAL_IDS = []
 
 # Charger les identifiants
 load_dotenv()
@@ -71,8 +75,22 @@ def resolve_optional_int(value):
         return None
 
 
+def resolve_goal_ids(value):
+    if value is None:
+        return []
+
+    raw_ids = value if isinstance(value, (list, tuple, set)) else [value]
+    result = []
+    for item in raw_ids:
+        resolved = resolve_optional_int(item)
+        if resolved is not None:
+            result.append(resolved)
+    return result
+
+
 PAGE_GROUP_MAPPING_ID = resolve_mapping_id(CONFIG_PAGE_GROUP_MAPPING_ID)
 PAGE_GROUP_ID = resolve_optional_int(CONFIG_PAGE_GROUP_ID)
+GOAL_IDS = resolve_goal_ids(CONFIG_GOAL_IDS)
 
 
 def build_http_session():
@@ -277,6 +295,21 @@ def get_page_group_web_vitals(endpoint, token, project_id, page_group_id, start_
     return request_json("GET", url, headers=headers, params=params)
 
 
+def get_page_group_conversion_rate(endpoint, token, project_id, page_group_id, start_date, end_date, goal_id, device="all", segment_ids=None):
+    url = f"{endpoint}/v1/metrics/page-group/{page_group_id}/conversion-rate"
+    headers = {"Authorization": f"Bearer {token}"}
+    params = {
+        "projectId": project_id,
+        "startDate": start_date,
+        "endDate": end_date,
+        "device": device,
+        "goalId": goal_id,
+    }
+    if segment_ids:
+        params["segments"] = ",".join(map(str, segment_ids))
+    return request_json("GET", url, headers=headers, params=params)
+
+
 def get_site_metrics(endpoint, token, project_id, start_date, end_date, device="all", segment_ids=None):
     url = f"{endpoint}/v1/metrics/site"
     headers = {"Authorization": f"Bearer {token}"}
@@ -442,7 +475,8 @@ def build_site_kpi_rows(metrics_data, project_id, device):
     return rows
 
 
-def build_group_kpi_rows(endpoint, token, project_id, start_date, end_date, page_groups, device):
+def build_group_kpi_rows(endpoint, token, project_id, start_date, end_date, page_groups, device, goal_ids=None):
+    goal_ids = goal_ids or []
     rows = []
     for page_group in page_groups:
         page_group_id = page_group.get("id")
@@ -468,6 +502,7 @@ def build_group_kpi_rows(endpoint, token, project_id, start_date, end_date, page
                     "page_group_id": page_group_id,
                     "page_group_name": page_group.get("name"),
                     "page_group_category": page_group.get("category"),
+                    "goal_id": None,
                     **metric,
                 }
             )
@@ -491,9 +526,37 @@ def build_group_kpi_rows(endpoint, token, project_id, start_date, end_date, page
                     "page_group_id": page_group_id,
                     "page_group_name": page_group.get("name"),
                     "page_group_category": page_group.get("category"),
+                    "goal_id": None,
                     **metric,
                 }
             )
+
+        # Goal-scoped metrics are intentionally added only at page-group level.
+        for goal_id in goal_ids:
+            goal_conv_rate = get_page_group_conversion_rate(
+                endpoint,
+                token,
+                project_id,
+                page_group_id,
+                start_date,
+                end_date,
+                goal_id=goal_id,
+                device=device,
+            )
+            for metric in metrics_response_to_rows(goal_conv_rate):
+                rows.append(
+                    {
+                        "project_id": project_id,
+                        "device": device,
+                        "mapping_id": page_group.get("mapping_id"),
+                        "mapping_name": page_group.get("mapping_name"),
+                        "page_group_id": page_group_id,
+                        "page_group_name": page_group.get("name"),
+                        "page_group_category": page_group.get("category"),
+                        "goal_id": goal_id,
+                        **metric,
+                    }
+                )
     return rows
 
 
@@ -543,6 +606,7 @@ def export_kpis_excel(export_dir, filename, site_rows, group_rows):
             "page_group_id",
             "page_group_name",
             "page_group_category",
+            "goal_id",
             "metric_name",
             "metric_value",
             "metric_start_date",
@@ -561,6 +625,7 @@ def export_kpis_excel(export_dir, filename, site_rows, group_rows):
                 row.get("page_group_id"),
                 row.get("page_group_name"),
                 row.get("page_group_category"),
+                row.get("goal_id"),
                 row.get("metric_name"),
                 normalize_excel_value(row.get("metric_value")),
                 row.get("metric_start_date"),
@@ -614,6 +679,7 @@ def main():
     print(f"   By device: {ANALYZE_BY_DEVICE}")
     print(f"   Période: {DAYS_TO_ANALYZE} jours")
     print(f"   Goal ID: {GOAL_ID}")
+    print(f"   Goal IDs (group KPI only): {GOAL_IDS}")
     print(f"   Page-group ID (KPI scope): {PAGE_GROUP_ID}")
     print(f"   Page-group mapping ID (export): {PAGE_GROUP_MAPPING_ID}")
     print(f"   Export dir: {EXPORT_DIR}")
@@ -764,6 +830,7 @@ def main():
             end_date_iso,
             page_groups,
             device="all",
+            goal_ids=GOAL_IDS,
         )
         excel_path = export_kpis_excel(EXPORT_DIR, KPI_EXCEL_FILENAME, site_kpi_rows, group_kpi_rows)
         print(f"📝 KPI Excel exporté: {excel_path}")
