@@ -6,7 +6,7 @@ Central configuration for ContentSquare scripts.
 ####### GENERAL PARAMS
 
 # Segment IDs to analyze. Keep empty to skip segment-level section.
-SEGMENT_IDS_TO_ANALYZE = []
+SEGMENT_IDS_TO_ANALYZE = [6383684, 6383688, 6383692]
 
 # Whether to show metrics split by desktop/mobile/tablet.
 ANALYZE_BY_DEVICE = True

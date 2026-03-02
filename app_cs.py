@@ -15,6 +15,7 @@ from requests.exceptions import RequestException, SSLError, Timeout
 from urllib3.util.retry import Retry
 try:
     from openpyxl import Workbook
+    from openpyxl.styles import PatternFill
 except ModuleNotFoundError as exc:
     raise SystemExit(
         "Missing dependency: openpyxl. Install it with: python3 -m pip install openpyxl"
@@ -32,6 +33,10 @@ try:
     from contentsquare_config import GOAL_IDS as CONFIG_GOAL_IDS
 except Exception:
     CONFIG_GOAL_IDS = []
+try:
+    from contentsquare_config import SEGMENT_IDS_TO_ANALYZE as CONFIG_SEGMENT_IDS_TO_ANALYZE
+except Exception:
+    CONFIG_SEGMENT_IDS_TO_ANALYZE = []
 
 # Charger les identifiants
 load_dotenv()
@@ -39,7 +44,7 @@ CLIENT_ID = os.getenv("CS_CLIENT_ID")
 CLIENT_SECRET = os.getenv("CS_CLIENT_SECRET")
 PROJECT_ID = os.getenv("CS_PROJECT_ID")
 
-SEGMENT_IDS_TO_ANALYZE = [5684436]
+SEGMENT_IDS_TO_ANALYZE = []
 ANALYZE_BY_DEVICE = True
 DAYS_TO_ANALYZE = 30
 GOAL_ID = None
@@ -88,9 +93,14 @@ def resolve_goal_ids(value):
     return result
 
 
+def resolve_segment_ids(value):
+    return resolve_goal_ids(value)
+
+
 PAGE_GROUP_MAPPING_ID = resolve_mapping_id(CONFIG_PAGE_GROUP_MAPPING_ID)
 PAGE_GROUP_ID = resolve_optional_int(CONFIG_PAGE_GROUP_ID)
 GOAL_IDS = resolve_goal_ids(CONFIG_GOAL_IDS)
+SEGMENT_IDS_TO_ANALYZE = resolve_segment_ids(CONFIG_SEGMENT_IDS_TO_ANALYZE)
 
 
 def build_http_session():
@@ -277,7 +287,7 @@ def get_page_group_metrics(endpoint, token, project_id, page_group_id, start_dat
         "device": device,
     }
     if segment_ids:
-        params["segments"] = ",".join(map(str, segment_ids))
+        params["segmentIds"] = ",".join(map(str, segment_ids))
     return request_json("GET", url, headers=headers, params=params)
 
 
@@ -291,7 +301,7 @@ def get_page_group_web_vitals(endpoint, token, project_id, page_group_id, start_
         "device": device,
     }
     if segment_ids:
-        params["segments"] = ",".join(map(str, segment_ids))
+        params["segmentIds"] = ",".join(map(str, segment_ids))
     return request_json("GET", url, headers=headers, params=params)
 
 
@@ -306,7 +316,7 @@ def get_page_group_conversion_rate(endpoint, token, project_id, page_group_id, s
         "goalId": goal_id,
     }
     if segment_ids:
-        params["segments"] = ",".join(map(str, segment_ids))
+        params["segmentIds"] = ",".join(map(str, segment_ids))
     return request_json("GET", url, headers=headers, params=params)
 
 
@@ -320,7 +330,7 @@ def get_site_metrics(endpoint, token, project_id, start_date, end_date, device="
         "device": device
     }
     if segment_ids:
-        params["segments"] = ",".join(map(str, segment_ids))
+        params["segmentIds"] = ",".join(map(str, segment_ids))
     return request_json("GET", url, headers=headers, params=params)
 
 
@@ -336,7 +346,7 @@ def get_ecommerce_conversions(endpoint, token, project_id, start_date, end_date,
     if goal_id:
         params["goalId"] = goal_id
     if segment_ids:
-        params["segments"] = ",".join(map(str, segment_ids))
+        params["segmentIds"] = ",".join(map(str, segment_ids))
     return request_json("GET", url, headers=headers, params=params)
 
 
@@ -352,7 +362,7 @@ def get_ecommerce_conversion_rate(endpoint, token, project_id, start_date, end_d
     if goal_id:
         params["goalId"] = goal_id
     if segment_ids:
-        params["segments"] = ",".join(map(str, segment_ids))
+        params["segmentIds"] = ",".join(map(str, segment_ids))
     return request_json("GET", url, headers=headers, params=params)
 
 
@@ -462,179 +472,267 @@ def metrics_response_to_rows(metrics_data):
     return rows
 
 
-def build_site_kpi_rows(metrics_data, project_id, device):
+def build_site_kpi_rows(metrics_data, project_id, device, segment_id=None):
     rows = []
     for metric in metrics_response_to_rows(metrics_data):
         rows.append(
             {
                 "project_id": project_id,
                 "device": device,
+                "segment_id": segment_id,
                 **metric,
             }
         )
     return rows
 
 
-def build_group_kpi_rows(endpoint, token, project_id, start_date, end_date, page_groups, device, goal_ids=None):
+def build_group_kpi_rows(
+    endpoint,
+    token,
+    project_id,
+    start_date,
+    end_date,
+    page_groups,
+    device,
+    goal_ids=None,
+    segment_ids=None,
+):
     goal_ids = goal_ids or []
+    segment_ids = segment_ids or [None]
     rows = []
     for page_group in page_groups:
         page_group_id = page_group.get("id")
         if page_group_id is None:
             continue
 
-        base_metrics = get_page_group_metrics(
-            endpoint,
-            token,
-            project_id,
-            page_group_id,
-            start_date,
-            end_date,
-            device=device,
-        )
-        for metric in metrics_response_to_rows(base_metrics):
-            rows.append(
-                {
-                    "project_id": project_id,
-                    "device": device,
-                    "mapping_id": page_group.get("mapping_id"),
-                    "mapping_name": page_group.get("mapping_name"),
-                    "page_group_id": page_group_id,
-                    "page_group_name": page_group.get("name"),
-                    "page_group_category": page_group.get("category"),
-                    "goal_id": None,
-                    **metric,
-                }
-            )
+        for segment_id in segment_ids:
+            segment_filter = [segment_id] if segment_id is not None else None
 
-        web_vitals = get_page_group_web_vitals(
-            endpoint,
-            token,
-            project_id,
-            page_group_id,
-            start_date,
-            end_date,
-            device=device,
-        )
-        for metric in metrics_response_to_rows(web_vitals):
-            rows.append(
-                {
-                    "project_id": project_id,
-                    "device": device,
-                    "mapping_id": page_group.get("mapping_id"),
-                    "mapping_name": page_group.get("mapping_name"),
-                    "page_group_id": page_group_id,
-                    "page_group_name": page_group.get("name"),
-                    "page_group_category": page_group.get("category"),
-                    "goal_id": None,
-                    **metric,
-                }
-            )
-
-        # Goal-scoped metrics are intentionally added only at page-group level.
-        for goal_id in goal_ids:
-            goal_conv_rate = get_page_group_conversion_rate(
+            base_metrics = get_page_group_metrics(
                 endpoint,
                 token,
                 project_id,
                 page_group_id,
                 start_date,
                 end_date,
-                goal_id=goal_id,
                 device=device,
+                segment_ids=segment_filter,
             )
-            for metric in metrics_response_to_rows(goal_conv_rate):
+            for metric in metrics_response_to_rows(base_metrics):
                 rows.append(
                     {
                         "project_id": project_id,
                         "device": device,
+                        "segment_id": segment_id,
                         "mapping_id": page_group.get("mapping_id"),
                         "mapping_name": page_group.get("mapping_name"),
                         "page_group_id": page_group_id,
                         "page_group_name": page_group.get("name"),
                         "page_group_category": page_group.get("category"),
-                        "goal_id": goal_id,
+                        "goal_id": None,
                         **metric,
                     }
                 )
+
+            web_vitals = get_page_group_web_vitals(
+                endpoint,
+                token,
+                project_id,
+                page_group_id,
+                start_date,
+                end_date,
+                device=device,
+                segment_ids=segment_filter,
+            )
+            for metric in metrics_response_to_rows(web_vitals):
+                rows.append(
+                    {
+                        "project_id": project_id,
+                        "device": device,
+                        "segment_id": segment_id,
+                        "mapping_id": page_group.get("mapping_id"),
+                        "mapping_name": page_group.get("mapping_name"),
+                        "page_group_id": page_group_id,
+                        "page_group_name": page_group.get("name"),
+                        "page_group_category": page_group.get("category"),
+                        "goal_id": None,
+                        **metric,
+                    }
+                )
+
+            # Goal-scoped metrics are intentionally added only at page-group level.
+            for goal_id in goal_ids:
+                goal_conv_rate = get_page_group_conversion_rate(
+                    endpoint,
+                    token,
+                    project_id,
+                    page_group_id,
+                    start_date,
+                    end_date,
+                    goal_id=goal_id,
+                    device=device,
+                    segment_ids=segment_filter,
+                )
+                for metric in metrics_response_to_rows(goal_conv_rate):
+                    rows.append(
+                        {
+                            "project_id": project_id,
+                            "device": device,
+                            "segment_id": segment_id,
+                            "mapping_id": page_group.get("mapping_id"),
+                            "mapping_name": page_group.get("mapping_name"),
+                            "page_group_id": page_group_id,
+                            "page_group_name": page_group.get("name"),
+                            "page_group_category": page_group.get("category"),
+                            "goal_id": goal_id,
+                            **metric,
+                        }
+                    )
     return rows
 
 
-def export_kpis_excel(export_dir, filename, site_rows, group_rows):
+def is_numeric(value):
+    return isinstance(value, (int, float)) and not isinstance(value, bool)
+
+
+def segment_value_column_name(segment_id):
+    if segment_id is None:
+        return "metric_value_all"
+    return f"metric_value_segment_{segment_id}"
+
+
+def normalize_segment_order(segment_ids, rows):
+    ordered = []
+    for segment_id in segment_ids or []:
+        if segment_id not in ordered:
+            ordered.append(segment_id)
+
+    for row in rows:
+        segment_id = row.get("segment_id")
+        if segment_id not in ordered:
+            ordered.append(segment_id)
+
+    if not ordered:
+        ordered = [None]
+    return ordered
+
+
+def pivot_rows_by_segment(rows, key_fields, segment_order):
+    grouped = {}
+
+    for row in rows:
+        normalized = dict(row)
+        normalized["metric_extra_json"] = normalize_excel_value(normalized.get("metric_extra"))
+        key = tuple(normalized.get(field) for field in key_fields)
+
+        if key not in grouped:
+            grouped[key] = {
+                "base": {field: normalized.get(field) for field in key_fields},
+                "values": {},
+            }
+        grouped[key]["values"][normalized.get("segment_id")] = normalized.get("metric_value")
+
+    return list(grouped.values())
+
+
+def apply_reference_coloring_on_pivot(ws, reference_segment_id):
+    if reference_segment_id is None or ws.max_row < 2:
+        return
+
+    headers = {cell.value: idx + 1 for idx, cell in enumerate(ws[1])}
+    reference_column = headers.get(segment_value_column_name(reference_segment_id))
+    if not reference_column:
+        return
+
+    compare_columns = [
+        idx
+        for name, idx in headers.items()
+        if name.startswith("metric_value_segment_") and idx != reference_column
+    ]
+    if not compare_columns:
+        return
+
+    fill_green = PatternFill(fill_type="solid", start_color="C6EFCE", end_color="C6EFCE")
+    fill_red = PatternFill(fill_type="solid", start_color="FFC7CE", end_color="FFC7CE")
+    fill_yellow = PatternFill(fill_type="solid", start_color="FFEB9C", end_color="FFEB9C")
+
+    for row_idx in range(2, ws.max_row + 1):
+        ref_value = ws.cell(row=row_idx, column=reference_column).value
+        if not is_numeric(ref_value):
+            continue
+
+        for col_idx in compare_columns:
+            value_cell = ws.cell(row=row_idx, column=col_idx)
+            value = value_cell.value
+            if not is_numeric(value):
+                continue
+
+            if float(value) > float(ref_value):
+                value_cell.fill = fill_green
+            elif float(value) < float(ref_value):
+                value_cell.fill = fill_red
+            else:
+                value_cell.fill = fill_yellow
+
+
+def export_kpis_excel(export_dir, filename, site_rows, group_rows, reference_segment_id=None, segment_ids=None):
     export_path = Path(export_dir)
     export_path.mkdir(parents=True, exist_ok=True)
     file_path = export_path / filename
 
     wb = Workbook()
+    segment_order = normalize_segment_order(segment_ids, site_rows + group_rows)
+    segment_columns = [segment_value_column_name(seg_id) for seg_id in segment_order]
 
     ws_site = wb.active
     ws_site.title = "site_wide_kpis"
-    ws_site.append(
-        [
-            "project_id",
-            "device",
-            "metric_name",
-            "metric_value",
-            "metric_start_date",
-            "metric_end_date",
-            "metric_currency",
-            "metric_extra_json",
-        ]
-    )
-    for row in site_rows:
+    site_key_fields = [
+        "project_id",
+        "device",
+        "metric_name",
+        "metric_currency",
+        "metric_extra_json",
+    ]
+    ws_site.append(site_key_fields + segment_columns)
+
+    site_pivot = pivot_rows_by_segment(site_rows, site_key_fields, segment_order)
+    for item in site_pivot:
+        base = item["base"]
+        values = item["values"]
         ws_site.append(
-            [
-                row.get("project_id"),
-                row.get("device"),
-                row.get("metric_name"),
-                normalize_excel_value(row.get("metric_value")),
-                row.get("metric_start_date"),
-                row.get("metric_end_date"),
-                row.get("metric_currency"),
-                normalize_excel_value(row.get("metric_extra")),
-            ]
+            [base.get(field) for field in site_key_fields]
+            + [normalize_excel_value(values.get(seg_id)) for seg_id in segment_order]
         )
     ws_site.freeze_panes = "A2"
 
     ws_group = wb.create_sheet("group_id_kpis")
-    ws_group.append(
-        [
-            "project_id",
-            "device",
-            "mapping_id",
-            "mapping_name",
-            "page_group_id",
-            "page_group_name",
-            "page_group_category",
-            "goal_id",
-            "metric_name",
-            "metric_value",
-            "metric_start_date",
-            "metric_end_date",
-            "metric_currency",
-            "metric_extra_json",
-        ]
-    )
-    for row in group_rows:
+    group_key_fields = [
+        "project_id",
+        "device",
+        "mapping_id",
+        "mapping_name",
+        "page_group_id",
+        "page_group_name",
+        "page_group_category",
+        "goal_id",
+        "metric_name",
+        "metric_currency",
+        "metric_extra_json",
+    ]
+    ws_group.append(group_key_fields + segment_columns)
+
+    group_pivot = pivot_rows_by_segment(group_rows, group_key_fields, segment_order)
+    for item in group_pivot:
+        base = item["base"]
+        values = item["values"]
         ws_group.append(
-            [
-                row.get("project_id"),
-                row.get("device"),
-                row.get("mapping_id"),
-                row.get("mapping_name"),
-                row.get("page_group_id"),
-                row.get("page_group_name"),
-                row.get("page_group_category"),
-                row.get("goal_id"),
-                row.get("metric_name"),
-                normalize_excel_value(row.get("metric_value")),
-                row.get("metric_start_date"),
-                row.get("metric_end_date"),
-                row.get("metric_currency"),
-                normalize_excel_value(row.get("metric_extra")),
-            ]
+            [base.get(field) for field in group_key_fields]
+            + [normalize_excel_value(values.get(seg_id)) for seg_id in segment_order]
         )
     ws_group.freeze_panes = "A2"
+
+    apply_reference_coloring_on_pivot(ws_site, reference_segment_id)
+    apply_reference_coloring_on_pivot(ws_group, reference_segment_id)
 
     wb.save(file_path)
     return file_path
@@ -789,9 +887,28 @@ def main():
     print("📊 MÉTRIQUES GLOBALES (Tous visiteurs)")
     print("-"*70)
     site_kpi_rows = []
+    segment_scope = SEGMENT_IDS_TO_ANALYZE[:] if SEGMENT_IDS_TO_ANALYZE else [None]
+    reference_segment_id = SEGMENT_IDS_TO_ANALYZE[0] if SEGMENT_IDS_TO_ANALYZE else None
     try:
         site_metrics = get_site_metrics(endpoint, token, PROJECT_ID, start_date_iso, end_date_iso)
-        site_kpi_rows = build_site_kpi_rows(site_metrics, PROJECT_ID, device="all")
+        for segment_id in segment_scope:
+            segment_filter = [segment_id] if segment_id is not None else None
+            site_metrics_for_segment = get_site_metrics(
+                endpoint,
+                token,
+                PROJECT_ID,
+                start_date_iso,
+                end_date_iso,
+                segment_ids=segment_filter,
+            )
+            site_kpi_rows.extend(
+                build_site_kpi_rows(
+                    site_metrics_for_segment,
+                    PROJECT_ID,
+                    device="all",
+                    segment_id=segment_id,
+                )
+            )
         goal_conversions = get_ecommerce_conversions(endpoint, token, PROJECT_ID, start_date_iso, end_date_iso)
         goal_conv_rate = get_ecommerce_conversion_rate(endpoint, token, PROJECT_ID, start_date_iso, end_date_iso)
         display_metrics("ALL DEVICES", site_metrics, goal_conversions, goal_conv_rate)
@@ -819,8 +936,24 @@ def main():
     print("-"*70)
     try:
         if not site_kpi_rows:
-            site_metrics = get_site_metrics(endpoint, token, PROJECT_ID, start_date_iso, end_date_iso)
-            site_kpi_rows = build_site_kpi_rows(site_metrics, PROJECT_ID, device="all")
+            for segment_id in segment_scope:
+                segment_filter = [segment_id] if segment_id is not None else None
+                site_metrics_for_segment = get_site_metrics(
+                    endpoint,
+                    token,
+                    PROJECT_ID,
+                    start_date_iso,
+                    end_date_iso,
+                    segment_ids=segment_filter,
+                )
+                site_kpi_rows.extend(
+                    build_site_kpi_rows(
+                        site_metrics_for_segment,
+                        PROJECT_ID,
+                        device="all",
+                        segment_id=segment_id,
+                    )
+                )
 
         group_kpi_rows = build_group_kpi_rows(
             endpoint,
@@ -831,8 +964,16 @@ def main():
             page_groups,
             device="all",
             goal_ids=GOAL_IDS,
+            segment_ids=segment_scope,
         )
-        excel_path = export_kpis_excel(EXPORT_DIR, KPI_EXCEL_FILENAME, site_kpi_rows, group_kpi_rows)
+        excel_path = export_kpis_excel(
+            EXPORT_DIR,
+            KPI_EXCEL_FILENAME,
+            site_kpi_rows,
+            group_kpi_rows,
+            reference_segment_id=reference_segment_id,
+            segment_ids=segment_scope,
+        )
         print(f"📝 KPI Excel exporté: {excel_path}")
         print(f"   - Site-wide KPIs: {len(site_kpi_rows)} ligne(s)")
         print(f"   - Group-ID KPIs:  {len(group_kpi_rows)} ligne(s)")
