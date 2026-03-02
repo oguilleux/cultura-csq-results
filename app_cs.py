@@ -5,6 +5,7 @@ Utilise les endpoints officiels de la Metrics API ContentSquare
 """
 
 import os
+import json
 import requests
 from dotenv import load_dotenv
 from datetime import datetime, timedelta, timezone
@@ -12,11 +13,21 @@ from pathlib import Path
 from requests.adapters import HTTPAdapter
 from requests.exceptions import RequestException, SSLError, Timeout
 from urllib3.util.retry import Retry
+try:
+    from openpyxl import Workbook
+except ModuleNotFoundError as exc:
+    raise SystemExit(
+        "Missing dependency: openpyxl. Install it with: python3 -m pip install openpyxl"
+    ) from exc
 
 try:
     from contentsquare_config import PAGE_GROUP_MAPPING_ID as CONFIG_PAGE_GROUP_MAPPING_ID
 except Exception:
     CONFIG_PAGE_GROUP_MAPPING_ID = 2066672
+try:
+    from contentsquare_config import PAGE_GROUP_ID as CONFIG_PAGE_GROUP_ID
+except Exception:
+    CONFIG_PAGE_GROUP_ID = None
 
 # Charger les identifiants
 load_dotenv()
@@ -29,6 +40,7 @@ ANALYZE_BY_DEVICE = True
 DAYS_TO_ANALYZE = 30
 GOAL_ID = None
 EXPORT_DIR = "exports"
+KPI_EXCEL_FILENAME = "contentsquare_kpis.xlsx"
 REQUEST_TIMEOUT_SECONDS = float(os.getenv("CS_REQUEST_TIMEOUT_SECONDS", "30"))
 RETRY_TOTAL = int(os.getenv("CS_RETRY_TOTAL", "3"))
 
@@ -46,7 +58,21 @@ def resolve_mapping_id(value, default=2066672):
         return default
 
 
+def resolve_optional_int(value):
+    if value is None:
+        return None
+    if isinstance(value, str):
+        value = value.strip()
+        if not value:
+            return None
+    try:
+        return int(value)
+    except (TypeError, ValueError):
+        return None
+
+
 PAGE_GROUP_MAPPING_ID = resolve_mapping_id(CONFIG_PAGE_GROUP_MAPPING_ID)
+PAGE_GROUP_ID = resolve_optional_int(CONFIG_PAGE_GROUP_ID)
 
 
 def build_http_session():
@@ -173,6 +199,84 @@ def get_page_groups_for_mapping(endpoint, token, project_id, mapping_id):
     return sorted(result, key=lambda item: item["id"])
 
 
+def get_all_page_groups(endpoint, token, project_id):
+    mappings_data = get_mappings(endpoint, token, project_id)
+    mappings = mappings_data.get("payload", [])
+    all_groups = []
+
+    for mapping in mappings:
+        mapping_id = mapping.get("id")
+        if mapping_id is None:
+            continue
+
+        page_groups_data = get_mapping_page_groups(endpoint, token, project_id, mapping_id)
+        for page_group in page_groups_data.get("payload", []):
+            page_group_id = page_group.get("id")
+            if page_group_id is None:
+                continue
+            all_groups.append(
+                {
+                    "id": page_group_id,
+                    "name": page_group.get("name"),
+                    "category": page_group.get("category"),
+                    "mapping_id": mapping_id,
+                    "mapping_name": mapping.get("name", ""),
+                }
+            )
+
+    return sorted(all_groups, key=lambda item: (item["mapping_id"], item["id"]))
+
+
+def find_page_group_by_id(endpoint, token, project_id, page_group_id):
+    target_id = str(page_group_id)
+    mappings_data = get_mappings(endpoint, token, project_id)
+    mappings = mappings_data.get("payload", [])
+
+    for mapping in mappings:
+        mapping_id = mapping.get("id")
+        if mapping_id is None:
+            continue
+        page_groups_data = get_mapping_page_groups(endpoint, token, project_id, mapping_id)
+        for page_group in page_groups_data.get("payload", []):
+            if str(page_group.get("id")) == target_id:
+                return {
+                    "id": page_group.get("id"),
+                    "name": page_group.get("name"),
+                    "category": page_group.get("category"),
+                    "mapping_id": mapping_id,
+                    "mapping_name": mapping.get("name", ""),
+                }
+    return None
+
+
+def get_page_group_metrics(endpoint, token, project_id, page_group_id, start_date, end_date, device="all", segment_ids=None):
+    url = f"{endpoint}/v1/metrics/page-group/{page_group_id}"
+    headers = {"Authorization": f"Bearer {token}"}
+    params = {
+        "projectId": project_id,
+        "startDate": start_date,
+        "endDate": end_date,
+        "device": device,
+    }
+    if segment_ids:
+        params["segments"] = ",".join(map(str, segment_ids))
+    return request_json("GET", url, headers=headers, params=params)
+
+
+def get_page_group_web_vitals(endpoint, token, project_id, page_group_id, start_date, end_date, device="all", segment_ids=None):
+    url = f"{endpoint}/v1/metrics/page-group/{page_group_id}/web-vitals"
+    headers = {"Authorization": f"Bearer {token}"}
+    params = {
+        "projectId": project_id,
+        "startDate": start_date,
+        "endDate": end_date,
+        "device": device,
+    }
+    if segment_ids:
+        params["segments"] = ",".join(map(str, segment_ids))
+    return request_json("GET", url, headers=headers, params=params)
+
+
 def get_site_metrics(endpoint, token, project_id, start_date, end_date, device="all", segment_ids=None):
     url = f"{endpoint}/v1/metrics/site"
     headers = {"Authorization": f"Bearer {token}"}
@@ -283,6 +387,194 @@ def export_ids_file(export_dir, filename_prefix, label, rows):
     return file_path
 
 
+def normalize_excel_value(value):
+    if isinstance(value, (dict, list)):
+        return json.dumps(value, ensure_ascii=False)
+    return value
+
+
+def metrics_response_to_rows(metrics_data):
+    payload = metrics_data.get("payload", {}) if isinstance(metrics_data, dict) else {}
+    rows = []
+
+    values = payload.get("values")
+    if isinstance(values, list):
+        for item in values:
+            if not isinstance(item, dict):
+                continue
+            extra = {k: v for k, v in item.items() if k not in {"name", "value", "startDate", "endDate", "currency"}}
+            rows.append(
+                {
+                    "metric_name": item.get("name"),
+                    "metric_value": item.get("value"),
+                    "metric_start_date": item.get("startDate"),
+                    "metric_end_date": item.get("endDate"),
+                    "metric_currency": item.get("currency"),
+                    "metric_extra": extra,
+                }
+            )
+        return rows
+
+    if "value" in payload:
+        rows.append(
+            {
+                "metric_name": payload.get("name"),
+                "metric_value": payload.get("value"),
+                "metric_start_date": payload.get("startDate"),
+                "metric_end_date": payload.get("endDate"),
+                "metric_currency": payload.get("currency"),
+                "metric_extra": {},
+            }
+        )
+    return rows
+
+
+def build_site_kpi_rows(metrics_data, project_id, device):
+    rows = []
+    for metric in metrics_response_to_rows(metrics_data):
+        rows.append(
+            {
+                "project_id": project_id,
+                "device": device,
+                **metric,
+            }
+        )
+    return rows
+
+
+def build_group_kpi_rows(endpoint, token, project_id, start_date, end_date, page_groups, device):
+    rows = []
+    for page_group in page_groups:
+        page_group_id = page_group.get("id")
+        if page_group_id is None:
+            continue
+
+        base_metrics = get_page_group_metrics(
+            endpoint,
+            token,
+            project_id,
+            page_group_id,
+            start_date,
+            end_date,
+            device=device,
+        )
+        for metric in metrics_response_to_rows(base_metrics):
+            rows.append(
+                {
+                    "project_id": project_id,
+                    "device": device,
+                    "mapping_id": page_group.get("mapping_id"),
+                    "mapping_name": page_group.get("mapping_name"),
+                    "page_group_id": page_group_id,
+                    "page_group_name": page_group.get("name"),
+                    "page_group_category": page_group.get("category"),
+                    **metric,
+                }
+            )
+
+        web_vitals = get_page_group_web_vitals(
+            endpoint,
+            token,
+            project_id,
+            page_group_id,
+            start_date,
+            end_date,
+            device=device,
+        )
+        for metric in metrics_response_to_rows(web_vitals):
+            rows.append(
+                {
+                    "project_id": project_id,
+                    "device": device,
+                    "mapping_id": page_group.get("mapping_id"),
+                    "mapping_name": page_group.get("mapping_name"),
+                    "page_group_id": page_group_id,
+                    "page_group_name": page_group.get("name"),
+                    "page_group_category": page_group.get("category"),
+                    **metric,
+                }
+            )
+    return rows
+
+
+def export_kpis_excel(export_dir, filename, site_rows, group_rows):
+    export_path = Path(export_dir)
+    export_path.mkdir(parents=True, exist_ok=True)
+    file_path = export_path / filename
+
+    wb = Workbook()
+
+    ws_site = wb.active
+    ws_site.title = "site_wide_kpis"
+    ws_site.append(
+        [
+            "project_id",
+            "device",
+            "metric_name",
+            "metric_value",
+            "metric_start_date",
+            "metric_end_date",
+            "metric_currency",
+            "metric_extra_json",
+        ]
+    )
+    for row in site_rows:
+        ws_site.append(
+            [
+                row.get("project_id"),
+                row.get("device"),
+                row.get("metric_name"),
+                normalize_excel_value(row.get("metric_value")),
+                row.get("metric_start_date"),
+                row.get("metric_end_date"),
+                row.get("metric_currency"),
+                normalize_excel_value(row.get("metric_extra")),
+            ]
+        )
+    ws_site.freeze_panes = "A2"
+
+    ws_group = wb.create_sheet("group_id_kpis")
+    ws_group.append(
+        [
+            "project_id",
+            "device",
+            "mapping_id",
+            "mapping_name",
+            "page_group_id",
+            "page_group_name",
+            "page_group_category",
+            "metric_name",
+            "metric_value",
+            "metric_start_date",
+            "metric_end_date",
+            "metric_currency",
+            "metric_extra_json",
+        ]
+    )
+    for row in group_rows:
+        ws_group.append(
+            [
+                row.get("project_id"),
+                row.get("device"),
+                row.get("mapping_id"),
+                row.get("mapping_name"),
+                row.get("page_group_id"),
+                row.get("page_group_name"),
+                row.get("page_group_category"),
+                row.get("metric_name"),
+                normalize_excel_value(row.get("metric_value")),
+                row.get("metric_start_date"),
+                row.get("metric_end_date"),
+                row.get("metric_currency"),
+                normalize_excel_value(row.get("metric_extra")),
+            ]
+        )
+    ws_group.freeze_panes = "A2"
+
+    wb.save(file_path)
+    return file_path
+
+
 def display_metrics(label, metrics_data, goal_conversions=None, goal_conversion_rate=None):
     sessions = extract_metric_value(metrics_data, "visits", fallback_key="sessions")
     pageviews = extract_metric_value(metrics_data, "pageviews", fallback_key="pageviews")
@@ -322,8 +614,10 @@ def main():
     print(f"   By device: {ANALYZE_BY_DEVICE}")
     print(f"   Période: {DAYS_TO_ANALYZE} jours")
     print(f"   Goal ID: {GOAL_ID}")
+    print(f"   Page-group ID (KPI scope): {PAGE_GROUP_ID}")
     print(f"   Page-group mapping ID (export): {PAGE_GROUP_MAPPING_ID}")
     print(f"   Export dir: {EXPORT_DIR}")
+    print(f"   KPI Excel: {KPI_EXCEL_FILENAME}")
     print()
 
     # 1. Authentification
@@ -377,8 +671,33 @@ def main():
 
     # 3ter. Page groups
     try:
-        page_groups = get_page_groups_for_mapping(endpoint, token, PROJECT_ID, PAGE_GROUP_MAPPING_ID)
-        print(f"✅ {len(page_groups)} page group(s) disponible(s) pour mapping {PAGE_GROUP_MAPPING_ID}")
+        if PAGE_GROUP_ID is not None:
+            selected_page_group = find_page_group_by_id(endpoint, token, PROJECT_ID, PAGE_GROUP_ID)
+            if not selected_page_group:
+                print(f"⚠️ Page group ID {PAGE_GROUP_ID} introuvable.")
+                page_groups = []
+            else:
+                page_groups = [selected_page_group]
+                print(f"✅ Export KPI limité au page group ID {PAGE_GROUP_ID} ({selected_page_group.get('name')})")
+        else:
+            page_groups = get_page_groups_for_mapping(endpoint, token, PROJECT_ID, PAGE_GROUP_MAPPING_ID)
+            if page_groups:
+                print(f"✅ {len(page_groups)} page group(s) disponible(s) pour mapping {PAGE_GROUP_MAPPING_ID}")
+            else:
+                guessed_page_group = find_page_group_by_id(endpoint, token, PROJECT_ID, PAGE_GROUP_MAPPING_ID)
+                if guessed_page_group:
+                    page_groups = [guessed_page_group]
+                    print(
+                        f"⚠️ {PAGE_GROUP_MAPPING_ID} ressemble à un page-group ID (pas un mapping ID). "
+                        "Export KPI limité à ce page group."
+                    )
+                else:
+                    print(
+                        f"⚠️ Aucun page group trouvé pour mapping {PAGE_GROUP_MAPPING_ID}. "
+                        "Fallback: récupération de tous les mappings."
+                    )
+                    page_groups = get_all_page_groups(endpoint, token, PROJECT_ID)
+                    print(f"✅ {len(page_groups)} page group(s) disponible(s) sur tous les mappings")
     except Exception as e:
         print(f"⚠️ Impossible de lister les page groups pour mapping {PAGE_GROUP_MAPPING_ID}: {e}")
         page_groups = []
@@ -403,8 +722,10 @@ def main():
     print("-"*70)
     print("📊 MÉTRIQUES GLOBALES (Tous visiteurs)")
     print("-"*70)
+    site_kpi_rows = []
     try:
         site_metrics = get_site_metrics(endpoint, token, PROJECT_ID, start_date_iso, end_date_iso)
+        site_kpi_rows = build_site_kpi_rows(site_metrics, PROJECT_ID, device="all")
         goal_conversions = get_ecommerce_conversions(endpoint, token, PROJECT_ID, start_date_iso, end_date_iso)
         goal_conv_rate = get_ecommerce_conversion_rate(endpoint, token, PROJECT_ID, start_date_iso, end_date_iso)
         display_metrics("ALL DEVICES", site_metrics, goal_conversions, goal_conv_rate)
@@ -426,6 +747,31 @@ def main():
             except Exception as e:
                 print(f"\n{device.upper()}: ❌ Erreur - {e}")
         print()
+
+    print("-"*70)
+    print("📁 EXPORT KPI EXCEL")
+    print("-"*70)
+    try:
+        if not site_kpi_rows:
+            site_metrics = get_site_metrics(endpoint, token, PROJECT_ID, start_date_iso, end_date_iso)
+            site_kpi_rows = build_site_kpi_rows(site_metrics, PROJECT_ID, device="all")
+
+        group_kpi_rows = build_group_kpi_rows(
+            endpoint,
+            token,
+            PROJECT_ID,
+            start_date_iso,
+            end_date_iso,
+            page_groups,
+            device="all",
+        )
+        excel_path = export_kpis_excel(EXPORT_DIR, KPI_EXCEL_FILENAME, site_kpi_rows, group_kpi_rows)
+        print(f"📝 KPI Excel exporté: {excel_path}")
+        print(f"   - Site-wide KPIs: {len(site_kpi_rows)} ligne(s)")
+        print(f"   - Group-ID KPIs:  {len(group_kpi_rows)} ligne(s)")
+    except Exception as e:
+        print(f"❌ Erreur export KPI Excel: {e}")
+    print()
 
     # 6. Métriques par segment
     if SEGMENT_IDS_TO_ANALYZE:

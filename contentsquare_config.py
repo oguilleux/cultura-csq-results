@@ -21,9 +21,9 @@ DAYS_OFFSET = 1
 
 # Page-group ID for page metrics mode.
 # Leave empty (None) to use site metrics endpoints instead.
-PAGE_GROUP_ID = None
+PAGE_GROUP_ID = 52516480
 
 # Mapping ID used to filter page groups export in app_cs.py.
 PAGE_GROUP_MAPPING_ID = 2066672
 
-GOAL_IDS = []
+GOAL_IDS = [1816096]
