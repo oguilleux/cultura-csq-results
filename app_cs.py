@@ -265,11 +265,11 @@ def format_percentage(value):
     return f"{value:.2f}%"
 
 
-def export_ids_file(export_dir, filename_prefix, run_stamp, label, rows):
+def export_ids_file(export_dir, filename_prefix, label, rows):
     export_path = Path(export_dir)
     export_path.mkdir(parents=True, exist_ok=True)
 
-    file_path = export_path / f"{filename_prefix}_{run_stamp}.txt"
+    file_path = export_path / f"{filename_prefix}.txt"
     generated_at = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
     with file_path.open("w", encoding="utf-8") as f:
@@ -313,8 +313,6 @@ def display_metrics(label, metrics_data, goal_conversions=None, goal_conversion_
 
 
 def main():
-    run_stamp = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S_%f")
-
     print("="*70)
     print("📊 CONTENTSQUARE - CONVERSIONS E-COMMERCE")
     print("="*70)
@@ -361,7 +359,7 @@ def main():
         segments = []
 
     segment_rows = [{"id": s.get("id"), "name": s.get("name"), "extra": ""} for s in segments]
-    segment_file = export_ids_file(EXPORT_DIR, "segments_ids", run_stamp, "Segment IDs", segment_rows)
+    segment_file = export_ids_file(EXPORT_DIR, "segments_ids", "Segment IDs", segment_rows)
     print(f"📝 Segment IDs exportés: {segment_file}")
 
     # 3bis. Goals
@@ -374,7 +372,7 @@ def main():
         goals = []
 
     goal_rows = [{"id": g.get("id"), "name": g.get("name"), "extra": g.get("type", "")} for g in goals]
-    goals_file = export_ids_file(EXPORT_DIR, "goals_ids", run_stamp, "Goal IDs", goal_rows)
+    goals_file = export_ids_file(EXPORT_DIR, "goals_ids", "Goal IDs", goal_rows)
     print(f"📝 Goal IDs exportés: {goals_file}")
 
     # 3ter. Page groups
@@ -397,7 +395,7 @@ def main():
         }
         for pg in page_groups
     ]
-    page_groups_file = export_ids_file(EXPORT_DIR, "page_group_ids", run_stamp, "Page Group IDs", page_group_rows)
+    page_groups_file = export_ids_file(EXPORT_DIR, "page_group_ids", "Page Group IDs", page_group_rows)
     print(f"📝 Page Group IDs exportés: {page_groups_file}")
     print()
 
