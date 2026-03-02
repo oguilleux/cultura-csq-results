@@ -38,6 +38,10 @@ try:
 except Exception:
     CONFIG_SEGMENT_IDS_TO_ANALYZE = []
 try:
+    from contentsquare_config import ANALYZE_BY_DEVICE as CONFIG_ANALYZE_BY_DEVICE
+except Exception:
+    CONFIG_ANALYZE_BY_DEVICE = True
+try:
     from contentsquare_config import START_DATE as CONFIG_START_DATE
 except Exception:
     CONFIG_START_DATE = None
@@ -106,6 +110,22 @@ def resolve_segment_ids(value):
     return resolve_goal_ids(value)
 
 
+def resolve_bool(value, default=True):
+    if value is None:
+        return default
+    if isinstance(value, bool):
+        return value
+    if isinstance(value, (int, float)):
+        return value != 0
+    if isinstance(value, str):
+        normalized = value.strip().lower()
+        if normalized in {"true", "1", "yes", "y", "on"}:
+            return True
+        if normalized in {"false", "0", "no", "n", "off"}:
+            return False
+    return default
+
+
 def parse_config_date(value, field_name):
     if value is None:
         raise ValueError(f"{field_name} est manquant. Définis-le dans contentsquare_config.py.")
@@ -122,6 +142,13 @@ PAGE_GROUP_MAPPING_ID = resolve_mapping_id(CONFIG_PAGE_GROUP_MAPPING_ID)
 PAGE_GROUP_ID = resolve_optional_int(CONFIG_PAGE_GROUP_ID)
 GOAL_IDS = resolve_goal_ids(CONFIG_GOAL_IDS)
 SEGMENT_IDS_TO_ANALYZE = resolve_segment_ids(CONFIG_SEGMENT_IDS_TO_ANALYZE)
+ANALYZE_BY_DEVICE = resolve_bool(CONFIG_ANALYZE_BY_DEVICE, default=True)
+
+
+def get_analysis_devices(analyze_by_device):
+    if analyze_by_device:
+        return ["all", "desktop", "tablet", "mobile"]
+    return ["all"]
 
 
 def build_http_session():
@@ -664,6 +691,7 @@ def apply_reference_coloring_on_pivot(ws, reference_segment_id):
     reference_column = headers.get(segment_value_column_name(reference_segment_id))
     if not reference_column:
         return
+    metric_name_column = headers.get("metric_name")
 
     compare_columns = [
         idx
@@ -681,6 +709,8 @@ def apply_reference_coloring_on_pivot(ws, reference_segment_id):
         ref_value = ws.cell(row=row_idx, column=reference_column).value
         if not is_numeric(ref_value):
             continue
+        metric_name = ws.cell(row=row_idx, column=metric_name_column).value if metric_name_column else None
+        reverse_coloring = metric_name == "bounceRate"
 
         for col_idx in compare_columns:
             value_cell = ws.cell(row=row_idx, column=col_idx)
@@ -689,9 +719,9 @@ def apply_reference_coloring_on_pivot(ws, reference_segment_id):
                 continue
 
             if float(value) > float(ref_value):
-                value_cell.fill = fill_green
+                value_cell.fill = fill_red if reverse_coloring else fill_green
             elif float(value) < float(ref_value):
-                value_cell.fill = fill_red
+                value_cell.fill = fill_green if reverse_coloring else fill_red
             else:
                 value_cell.fill = fill_yellow
 
@@ -919,41 +949,54 @@ def main():
     print("📊 MÉTRIQUES GLOBALES (Tous visiteurs)")
     print("-"*70)
     site_kpi_rows = []
+    group_kpi_rows = []
     segment_scope = SEGMENT_IDS_TO_ANALYZE[:] if SEGMENT_IDS_TO_ANALYZE else [None]
+    device_scope = get_analysis_devices(ANALYZE_BY_DEVICE)
+    detailed_device_scope = [device for device in device_scope if device != "all"]
     reference_segment_id = SEGMENT_IDS_TO_ANALYZE[0] if SEGMENT_IDS_TO_ANALYZE else None
     try:
-        site_metrics = get_site_metrics(endpoint, token, PROJECT_ID, start_date_iso, end_date_iso)
-        for segment_id in segment_scope:
-            segment_filter = [segment_id] if segment_id is not None else None
-            site_metrics_for_segment = get_site_metrics(
+        for device in device_scope:
+            site_metrics = get_site_metrics(
                 endpoint,
                 token,
                 PROJECT_ID,
                 start_date_iso,
                 end_date_iso,
-                segment_ids=segment_filter,
+                device=device,
             )
-            site_kpi_rows.extend(
-                build_site_kpi_rows(
-                    site_metrics_for_segment,
+            for segment_id in segment_scope:
+                segment_filter = [segment_id] if segment_id is not None else None
+                site_metrics_for_segment = get_site_metrics(
+                    endpoint,
+                    token,
                     PROJECT_ID,
-                    device="all",
-                    segment_id=segment_id,
+                    start_date_iso,
+                    end_date_iso,
+                    device=device,
+                    segment_ids=segment_filter,
                 )
-            )
-        goal_conversions = get_ecommerce_conversions(endpoint, token, PROJECT_ID, start_date_iso, end_date_iso)
-        goal_conv_rate = get_ecommerce_conversion_rate(endpoint, token, PROJECT_ID, start_date_iso, end_date_iso)
-        display_metrics("ALL DEVICES", site_metrics, goal_conversions, goal_conv_rate)
+                site_kpi_rows.extend(
+                    build_site_kpi_rows(
+                        site_metrics_for_segment,
+                        PROJECT_ID,
+                        device=device,
+                        segment_id=segment_id,
+                    )
+                )
+            if device == "all":
+                goal_conversions = get_ecommerce_conversions(endpoint, token, PROJECT_ID, start_date_iso, end_date_iso)
+                goal_conv_rate = get_ecommerce_conversion_rate(endpoint, token, PROJECT_ID, start_date_iso, end_date_iso)
+                display_metrics("ALL DEVICES", site_metrics, goal_conversions, goal_conv_rate)
     except Exception as e:
         print(f"❌ Erreur: {e}")
     print()
 
     # 5. Métriques par device
-    if ANALYZE_BY_DEVICE:
+    if detailed_device_scope:
         print("-"*70)
         print("📱 MÉTRIQUES PAR DEVICE")
         print("-"*70)
-        for device in ["desktop", "mobile", "tablet"]:
+        for device in detailed_device_scope:
             try:
                 site_metrics = get_site_metrics(endpoint, token, PROJECT_ID, start_date_iso, end_date_iso, device=device)
                 goal_conversions = get_ecommerce_conversions(endpoint, token, PROJECT_ID, start_date_iso, end_date_iso, device=device)
@@ -967,37 +1010,20 @@ def main():
     print("📁 EXPORT KPI EXCEL")
     print("-"*70)
     try:
-        if not site_kpi_rows:
-            for segment_id in segment_scope:
-                segment_filter = [segment_id] if segment_id is not None else None
-                site_metrics_for_segment = get_site_metrics(
+        for device in device_scope:
+            group_kpi_rows.extend(
+                build_group_kpi_rows(
                     endpoint,
                     token,
                     PROJECT_ID,
                     start_date_iso,
                     end_date_iso,
-                    segment_ids=segment_filter,
+                    page_groups,
+                    device=device,
+                    goal_ids=GOAL_IDS,
+                    segment_ids=segment_scope,
                 )
-                site_kpi_rows.extend(
-                    build_site_kpi_rows(
-                        site_metrics_for_segment,
-                        PROJECT_ID,
-                        device="all",
-                        segment_id=segment_id,
-                    )
-                )
-
-        group_kpi_rows = build_group_kpi_rows(
-            endpoint,
-            token,
-            PROJECT_ID,
-            start_date_iso,
-            end_date_iso,
-            page_groups,
-            device="all",
-            goal_ids=GOAL_IDS,
-            segment_ids=segment_scope,
-        )
+            )
         excel_path = export_kpis_excel(
             EXPORT_DIR,
             KPI_EXCEL_FILENAME,
