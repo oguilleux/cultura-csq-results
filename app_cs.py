@@ -9,6 +9,9 @@ import requests
 from dotenv import load_dotenv
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
+from requests.adapters import HTTPAdapter
+from requests.exceptions import RequestException, SSLError, Timeout
+from urllib3.util.retry import Retry
 
 try:
     from contentsquare_config import PAGE_GROUP_MAPPING_ID as CONFIG_PAGE_GROUP_MAPPING_ID
@@ -26,6 +29,8 @@ ANALYZE_BY_DEVICE = True
 DAYS_TO_ANALYZE = 30
 GOAL_ID = None
 EXPORT_DIR = "exports"
+REQUEST_TIMEOUT_SECONDS = float(os.getenv("CS_REQUEST_TIMEOUT_SECONDS", "30"))
+RETRY_TOTAL = int(os.getenv("CS_RETRY_TOTAL", "3"))
 
 
 def resolve_mapping_id(value, default=2066672):
@@ -44,6 +49,55 @@ def resolve_mapping_id(value, default=2066672):
 PAGE_GROUP_MAPPING_ID = resolve_mapping_id(CONFIG_PAGE_GROUP_MAPPING_ID)
 
 
+def build_http_session():
+    retry = Retry(
+        total=RETRY_TOTAL,
+        connect=RETRY_TOTAL,
+        read=RETRY_TOTAL,
+        status=RETRY_TOTAL,
+        backoff_factor=0.5,
+        status_forcelist=[429, 500, 502, 503, 504],
+        allowed_methods=frozenset({"GET", "POST"}),
+        raise_on_status=False,
+    )
+    adapter = HTTPAdapter(max_retries=retry)
+    session = requests.Session()
+    session.mount("https://", adapter)
+    session.mount("http://", adapter)
+    return session
+
+
+HTTP_SESSION = build_http_session()
+
+
+def request_json(method, url, headers=None, params=None, json=None):
+    try:
+        response = HTTP_SESSION.request(
+            method=method,
+            url=url,
+            headers=headers,
+            params=params,
+            json=json,
+            timeout=REQUEST_TIMEOUT_SECONDS,
+        )
+        response.raise_for_status()
+        return response.json()
+    except Timeout as exc:
+        raise RuntimeError(
+            f"Timeout après {REQUEST_TIMEOUT_SECONDS}s vers {url}. "
+            "Vérifie la connectivité réseau et la valeur du endpoint."
+        ) from exc
+    except SSLError as exc:
+        raise RuntimeError(
+            f"Erreur SSL vers {url}. Vérifie les certificats locaux, proxy/VPN ou endpoint."
+        ) from exc
+    except RequestException as exc:
+        status_code = getattr(exc.response, "status_code", None)
+        if status_code:
+            raise RuntimeError(f"HTTP {status_code} sur {url}: {exc}") from exc
+        raise RuntimeError(f"Erreur réseau vers {url}: {exc}") from exc
+
+
 def get_token(client_id, client_secret, project_id):
     auth_url = "https://api.eu-west-1.production.contentsquare.com/v1/oauth/token"
     payload = {
@@ -53,46 +107,40 @@ def get_token(client_id, client_secret, project_id):
         "scope": "metrics",
         "projectId": project_id
     }
-    response = requests.post(auth_url, json=payload)
-    response.raise_for_status()
-    data = response.json()
-    return data.get("access_token"), data.get("endpoint")
+    data = request_json("POST", auth_url, json=payload)
+    token = data.get("access_token")
+    endpoint = data.get("endpoint")
+    if not token or not endpoint:
+        raise RuntimeError("Réponse OAuth invalide: access_token ou endpoint manquant.")
+    return token, endpoint
 
 
 def get_segments(endpoint, token, project_id):
     url = f"{endpoint}/v1/segments"
     headers = {"Authorization": f"Bearer {token}"}
     params = {"projectId": project_id}
-    response = requests.get(url, headers=headers, params=params)
-    response.raise_for_status()
-    return response.json()
+    return request_json("GET", url, headers=headers, params=params)
 
 
 def get_goals(endpoint, token, project_id):
     url = f"{endpoint}/v1/goals"
     headers = {"Authorization": f"Bearer {token}"}
     params = {"projectId": project_id}
-    response = requests.get(url, headers=headers, params=params)
-    response.raise_for_status()
-    return response.json()
+    return request_json("GET", url, headers=headers, params=params)
 
 
 def get_mappings(endpoint, token, project_id):
     url = f"{endpoint}/v1/mappings"
     headers = {"Authorization": f"Bearer {token}"}
     params = {"projectId": project_id}
-    response = requests.get(url, headers=headers, params=params)
-    response.raise_for_status()
-    return response.json()
+    return request_json("GET", url, headers=headers, params=params)
 
 
 def get_mapping_page_groups(endpoint, token, project_id, mapping_id):
     url = f"{endpoint}/v1/mappings/{mapping_id}/page-groups"
     headers = {"Authorization": f"Bearer {token}"}
     params = {"projectId": project_id}
-    response = requests.get(url, headers=headers, params=params)
-    response.raise_for_status()
-    return response.json()
+    return request_json("GET", url, headers=headers, params=params)
 
 
 def get_page_groups_for_mapping(endpoint, token, project_id, mapping_id):
@@ -136,9 +184,7 @@ def get_site_metrics(endpoint, token, project_id, start_date, end_date, device="
     }
     if segment_ids:
         params["segments"] = ",".join(map(str, segment_ids))
-    response = requests.get(url, headers=headers, params=params)
-    response.raise_for_status()
-    return response.json()
+    return request_json("GET", url, headers=headers, params=params)
 
 
 def get_ecommerce_conversions(endpoint, token, project_id, start_date, end_date, goal_id=None, device="all", segment_ids=None):
@@ -154,9 +200,7 @@ def get_ecommerce_conversions(endpoint, token, project_id, start_date, end_date,
         params["goalId"] = goal_id
     if segment_ids:
         params["segments"] = ",".join(map(str, segment_ids))
-    response = requests.get(url, headers=headers, params=params)
-    response.raise_for_status()
-    return response.json()
+    return request_json("GET", url, headers=headers, params=params)
 
 
 def get_ecommerce_conversion_rate(endpoint, token, project_id, start_date, end_date, goal_id=None, device="all", segment_ids=None):
@@ -172,9 +216,7 @@ def get_ecommerce_conversion_rate(endpoint, token, project_id, start_date, end_d
         params["goalId"] = goal_id
     if segment_ids:
         params["segments"] = ",".join(map(str, segment_ids))
-    response = requests.get(url, headers=headers, params=params)
-    response.raise_for_status()
-    return response.json()
+    return request_json("GET", url, headers=headers, params=params)
 
 
 def extract_metric_value(metrics_data, metric_name, fallback_key=None):

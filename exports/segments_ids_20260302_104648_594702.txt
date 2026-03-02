@@ -1,0 +1,1528 @@
+# Segment IDs
+# generated_at_utc: 2026-03-02T10:46:49Z
+# total: 1510
+# format: id\tname\textra
+1	COMMON.DEFAULT_SEGMENT.NEW_USERS	
+2	COMMON.DEFAULT_SEGMENT.RETURNING_USERS	
+3	COMMON.DEFAULT_SEGMENT.BOTS_AND_SPIDERS	
+4	COMMON.DEFAULT_SEGMENT.PURCHASE_INTENT_USERS	
+7	COMMON.DEFAULT_SEGMENT.SESSIONS_WITH_TRANSACTIONS	
+8	COMMON.DEFAULT_SEGMENT.SESSIONS_WITHOUT_TRANSACTIONS	
+12	COMMON.DEFAULT_SEGMENT.NON_BOUNCE_SESSIONS	
+13	COMMON.DEFAULT_SEGMENT.BOUNCE_SESSIONS	
+211547	CS- atteint page accueil en landing	
+215817	CS - API Error Checkout Payment	
+218886	A vu la page “Produit”	
+218888	A vu la page “Produit”	
+382240	CS - SM - View cart users	
+383488	CS- Scroll product page- +50%	
+392416	View page “Produit”	
+392672	CS - SM - Reach pdp	
+392768	CS - SM - Landing HP	
+393456	CS - SM - have seen produit 	
+395328	CS - SM - Have viewed Search results	
+399552	CS - Script Error Paiement	
+400000	CS - SM: Popin to Panier	
+400048	CS - SM: Popin to Produit	
+401312	CS - From Paiement To Panier	
+436384	CS - SM - Segment Error Payment	
+512256	Atteinte univers Modelage - Moulage (LP+FP)	
+524352	CS - JS error Panier 7/12	
+538256	Clic sur la zone Shopping list fiche tuto (desktop)	
+538272	Clic sur la zone CTA ajout panier fiche tuto (desktop)	
+538336	Atteinte LP Arts&LC SANS voir tuto	
+538368	Atteinte tuto	
+538464	Atteinte FP Arts&LC SANS voir tuto	
+542096	Atteinte boutique Cricut (LP+FP)	
+578560	EB - produit puis panier	
+578576	EB - recherche puis panier	
+578688	EB non bounce ajout panier	
+581808	CS - Bouncers on PDP	
+581824	CS - Non-bouncers on PDP	
+581920	CS - User scrolling +50% on PDP	
+581952	CS - User scrolling +50% on PDP excl. bouncers	
+581968	CS - User scrolling -50% on PDP excl. bouncers	
+586352	CS - User scrolling +50% on PDP excl. bouncers copy	
+635504	test claudia	
+652160	CS - Cannot set properties of null (setting 'value') JS	
+652208	Users 'Cannot set properties of null (setting 'value')'	
+652224	Erreur JS paiement FT	
+652320	FT erreur page paiement	
+652448	FT NOT erreur JS paiement	
+652896	FT erreur panier	
+664496	AF - AB Test Optin Reference	
+664544	AF - AB Test Optin A	
+664560	AF - AB Test Optin B	
+664576	AF - AB Test Optin C	
+664592	AF - AB Test Optin D	
+697680	CS JC - 404	
+697696	CS JC - JS Error (any pages)	
+697744	CS JC - API Error (any pages)	
+761440	CS - SD - JS Error Page Panier 1 	
+761456	CS - SD - Reached Page Panier (One)	
+822048	A Vu 3 PDPs	
+822080	A Vu 5 PDPs	
+823328	Click zone centered-container on PDP	
+823344	Not Clicked zone centered-container on PDP	
+825920	Clic sur la zone Bannière principale - desktop - ANALYSE HOMEPAGE	
+825936	Clic sur la zone  Entrées métiers - desktop - ANALYSE HOMEPAGE 	
+825952	Clic sur la zone  Bloc sélections - desktop - ANALYSE HOMEPAGE 	
+825968	Clic sur la zone L'actu à la loupe - desktop - ANALYSE HOMEPAGE	
+825984	Clic sur la zone  Bannières bons plans - desktop - ANALYSE HOMEPAGE	
+826000	Clic sur la zone  Smart actu - desktop - ANALYSE HOMEPAGE	
+826016	Clic sur la zone Culturaddict - desktop - ANALYSE HOMEPAGE	
+826032	Clic sur la zone Communautés - desktop - ANALYSE HOMEPAGE	
+826160	Clic sur la Search bar - desktop - ANALYSE HOMEPAGE	
+850208	A vu la PDP en 1	
+850256	A vu la PDP en 2, 3 ou 4	
+851296	Clic sur la zone reviews	
+852992	Récurrence de clics sur la zone product-reassurance-picto	
+853136	Récurrence de clics sur la zone mb-15	
+853152	Récurrence de clics sur la zone tab-global-content-additional-desktop	
+853920	Clic sur la zone "Reviews"	
+856656	Clic sur la zone  Bannière principale - mobile - ANALYSE HOMEPAGE 	
+856672	Clic sur la zone Entrées métiers - mobile - ANALYSE HOMEPAGE	
+856688	Clic sur la zone Bloc sélections - mobile - ANALYSE HOMEPAGE	
+856704	Clic sur la zone L'actu à la loupe - mobile - ANALYSE HOMEPAGE	
+856720	Clic sur la zone Bannières bons plans - mobile - ANALYSE HOMEPAGE	
+856736	Clic sur la zone Smart actu - mobile - ANALYSE HOMEPAGE	
+856752	Clic sur la zone Culturaddict - mobile - ANALYSE HOMEPAGE	
+856768	Clic sur la zone Communautés - mobile - ANALYSE HOMEPAGE	
+860288	Clic sur la zone Header NAV univers - desktop - ANALYSE UNIVERS ARTS&LC	
+860304	Clic sur la zone Bannières commerce - desktop - ANALYSE UNIVERS ARTS&LC	
+860320	Clic sur la zone Smart actu - desktop - ANALYSE UNIVERS ARTS&LC	
+860336	Clic sur la zone Coup de cœur - desktop - ANALYSE UNIVERS ARTS&LC	
+860352	Clic sur la zone Bandeau parallaxe - desktop - ANALYSE UNIVERS ARTS&LC	
+860368	Clic sur la zone Meilleures ventes - desktop - ANALYSE UNIVERS ARTS&LC	
+860384	Clic sur la zone Inspiration - desktop - ANALYSE UNIVERS ARTS&LC	
+860400	Clic sur la zone Nouveautés - desktop - ANALYSE UNIVERS ARTS&LC	
+860416	Clic sur la zone Marques - desktop - ANALYSE UNIVERS ARTS&LC	
+860432	Clic sur la zone Header NAV univers - mobile - ANALYSE UNIVERS ARTS&LC	
+860448	Clic sur la zone Bannières commerce - mobile - ANALYSE UNIVERS ARTS&LC	
+860464	Clic sur la zone Smart actu - mobile - ANALYSE UNIVERS ARTS&LC	
+860496	Clic sur la zone Coup de cœur - mobile - ANALYSE UNIVERS ARTS&LC	
+860528	Clic sur la zone Bandeau parallaxe - mobile - ANALYSE UNIVERS ARTS&LC	
+860544	Clic sur la zone Meilleures ventes - mobile - ANALYSE UNIVERS ARTS&LC	
+860560	Clic sur la zone Inspiration - mobile - ANALYSE UNIVERS ARTS&LC	
+860576	Clic sur la zone Nouveautés - mobile - ANALYSE UNIVERS ARTS&LC	
+860608	Clic sur la zone Marques - mobile - ANALYSE UNIVERS ARTS&LC	
+1018880	CS - Error JS Checkout 1 Panier	
+1051248	vue page tutos opé kids	
+1083520	Clic sur la zone Header - Univers Livres pour enfant	
+1083536	Clic sur la zone menu categories univers GAMING	
+1083552	Clic sur la zone Bannière Carrousel - Page univers livres pour enfants - MOBILE	
+1083584	Clic sur la zone bannières carrousel Gaming (MOBILE)	
+1083600	Clic sur la zone SMTactu - Page univers Livres pour enfant - MOBILE	
+1083648	Clic sur la zone Parallaxe - Page univers livres pour enfant - MOBILE	
+1083664	Clic sur la zone Carrousel produit - Page univers livres pour enfant - MOBILE	
+1102336	Clic sur la zone Coup de cœur - Univers livres enfant	
+1102352	Clic sur la zone SMT-Actu - Héros des petits - Univers livre enfants	
+1289216	Sessions avec Ajout panier	
+1289232	Sessions sans Ajout panier	
+1315936	Clic sur la zone < continuer mes achats checkout cart mobile	
+1316000	Clic sur la zone logo cultura checkout cart mobile	
+1323584	PDP + "Ajout panier"	
+1323600	SEARCH + "Ajout panier"	
+1323616	PLPUNI + "Ajout panier"	
+1323648	HP + "Ajout panier"	
+1326336	Séquence : étapes vers la page "ONE - Checkout 1 - Panier"	
+1326384	Séquence : étapes vers la page "ONE - Checkout 1 - Panier"	
+1332176	OLD - PDP + "Ajout panier"	
+1332192	OLD - SEARCH + "Ajout panier"	
+1332208	OLD - PLP HOMEn2 + "Ajout panier"	
+1332224	OLD - PLP n3n4n5 + "Ajout panier"	
+1332240	OLD - PLP autre + "Ajout panier"	
+1332256	OLD - HP + "Ajout panier"	
+1341936	User qui Clic sur Bannière principale - HP	
+1342032	User ayant vu la HP	
+1342112	User qui Clic sur Compo Bienvenue - HP	
+1369952	User qui Clic sur Compo Sélection / Tendance - HP	
+1370000	User qui Clic sur Slider produits Actus - HP	
+1370016	User qui Clic sur BAN Commerce / Trade - HP	
+1370032	User qui Clic sur Tuto / Inspi - HP	
+1374624	Clic sur Input Search	
+1377248	Clics TAGS RAYONS - Portail RDC - Desktop	
+1377632	Clics BANNIERES Carrousel - Portail RDC - Desktop	
+1377664	Clic BANNIERES CARROUSEL - Portail RDC - Desktop	
+1377728	Clics BLOCS SÉLECTIONS - Portail RDC - Desktop	
+1377792	Clic PARALLAX - Portail RDC - Desktop	
+1377856	Clic CARROUSEL PRODUITS - Portail RDC - Desktop	
+1377872	Clic KIT BUNDLE - Portail RDC - Desktop	
+1377920	Clic GUIDES ACHAT Carrousel - Portail RDC - Desktop	
+1378016	Clic Carrousel MARQUES - Portail RDC - Desktop	
+1378032	Clic Carrousel MARQUES - Portail RDC - Desktop	
+1378080	Clic ESSENTIELS Listes Sco - Portail RDC - Desktop	
+1378176	Clic BLOCS TENDANCES - Portail RDC - Desktop	
+1378240	Clic PARTENAIRES Carrousel - Portail RDC - Desktop	
+1380176	USER ayant vu le PORTAIL RDC	
+1382480	OLD - User ayant vu la PDP	
+1382496	ONE - User ayant vu la PDP	
+1382608	ONE - User ayant vu le SEARCH	
+1383712	Clic sur la zone Produits	
+1383744	Clic sur la zone Univers produits	
+1383824	Clic / Survol sur la zone Produits	
+1383936	Clic sur la zone Menu Burger - Mobile	
+1383968	OLD - Clic Menu Burger - Mobile	
+1384128	ONE - Clic sur menu burger - Mobile	
+1384144	OLD - Clic sur menu burger - Mobile	
+1384512	Clics STOP BOUNCE - Portail RDC - Desktop	
+1385840	Clic sur la zone continuer	
+1385872	Clic sur la zone PaysFrancecode postal - Etape livraison	
+1385888	Clic sur la zone password-signin	
+1387136	Clics NAV Rayons - Home UNIVERS PAPET - Desktop	
+1387152	Clics BANNIERES Carrousel - Home UNIVERS PAPET - Desktop	
+1387168	Clics SELECTIONS Blocs - Home UNIVERS PAPET - Desktop	
+1387184	Clics PRODUITS Carrousel - Home UNIVERS PAPET - Desktop	
+1387344	Clics PARALLAX - Home UNIVERS PAPET - Desktop	
+1387376	Clics KIT BUNDLE - Home UNIVERS PAPET - Desktop	
+1387392	Clics GUIDES ACHAT - Home UNIVERS PAPET - desktop	
+1387424	Clics MARQUES Carrousel - Home UNIVERS PAPET - desktop	
+1387504	Clics PARTENAIRES Carrousel - Home UNIVERS PAPET - desktop	
+1387776	USER ayant vu la HOME Univers PAPET	
+1528048	AB - Format PDP ebook - original	
+1528096	AB - Format PDP ebook - variante	
+1530288	ONE - AB Format (original) + User clic Ajout panier + Télécharger depuis PDP	
+1532912	ONE - AB Format (variante) + User clic Ajout panier + Télécharger depuis PDP copier	
+1532944	ONE - AB Format (original) + User clic Télécharger depuis PDP	
+1532960	ONE - AB Format (variante) + User clic Télécharger depuis PDP	
+1585696	AB Test Header Panier Desktop Originale	
+1585712	AB Test Header Panier Desktop Variation	
+1585728	AB Test Header Panier Mobile Originale	
+1585760	AB Test Header Panier Mobile Variation	
+1585776	AB Test Header D+M Originale	
+1585808	AB Test Header D+M Variation	
+1585904	AB Test Header D Ori - Séquence : étapes vers la page "ONE - HP"	
+1585920	AB Test Header D Var - Séquence : étapes vers la page "ONE - HP" copier	
+1585936	Séquence : étapes vers la page "ONE - HP"	
+1585952	Séquence : étapes vers la page "ONE - Search result page"	
+1586192	Page entrée panier	
+1586208	Page sortie panier	
+1586320	Séquence : étapes vers la page "ONE - PDP"	
+1591504	CS - a vu popin ajout panier erreur JS groupée 1166	
+1631552	Ebook PDP	
+1631856	Vu ebook (PLP/PDP...)	
+1631872	Vu livre (PLP/PDP...)	
+1634128	AB PDP Livres Ori	
+1634144	AB PDP Livres Var	
+1634272	Livre / livre jeunesse PDP	
+1914176	test - double erreur	
+2174000	AB TEST 169643 - 775613 - Menu Burger - Var Burger à gauche	
+2174048	AB TEST 169643 - Original - Menu Burger	
+2182384	AB TEST 169643 - 775614 - Menu Burger - Var Burger à gauche + wordings	
+2189696	CS - a cliqué sur cross-sell	
+2210976	CS - Clic sur image principale	
+2210992	KC- Clic sur la zone premier bloc nav (test)	
+2340112	Clic sur la flèche retour - panier - mobile	
+2340240	View page “ONE - Checkout 1 - Panier”	
+2340304	continuer mes achats - panier - mobile	
+2341056	Clic continuer mes achats - Panier - Desktop	
+2341344	Continuer mes achats bas de page - Panier - Desktop	
+2351024	Pas de clic sur continuer mes achats - Panier - Mobile	
+2351152	Clic recurrence supp à 2 cadenas - Panier - Mobile	
+2351168	Reccurence clic inf à 2 cadenas - Panier - Mobile	
+2351232	Ne clique pas sur Flèche retour - Panier - Mobile	
+2360448	AB 11 - PLP & Search Choix Mag - Strong Buttton	
+2360464	AB 11 PLP & Search Choix Mag - Original 	
+2370000	AB 12 - Estimation Livraison - Original 	
+2370016	AB 12 - Estimation Livraison - Ouvert	
+2370032	AB 12 - Estimation Livraison - Lien + Toaster	
+2370048	AB 12 - Estimation Livraison - Bouton + Toaster	
+2452496	Clic Menu Burger Mobile	
+2452752	Click zone  Moyens de paiement - Desktop	
+2452816	Click zone moyens de paiement - Mobile	
+2479664	CS - a connu une erreur JS (site)	
+2479680	CS - a connu une erreur API (site)	
+2480496	CS - erreur JS sur PDP - Chrome108 - others	
+2493232	AF - AB Test CTA Eresa A	
+2493280	AF - AB Test CTA Eresa B	
+2505344	ADT - vue univers Noël	
+2505616	ADT - vue moteur à cadeaux	
+2507920	CS - PDP reference - AB_Kameleoon_177554	
+2507936	CS - PDP V1 AB_Kameleoon_177554	
+2508144	CS - V1 AB Kameleoon panier	
+2541520	Clic sur la NAV Nintendo Switch	
+2541680	Clic sur la NAV Playstation 5	
+2541760	Clic sur Zone bannières commerce - HOME GAMING	
+2541872	Clic sur Zone NAV PS4 - HOME GAMING	
+2541904	Clic sur Zone NAV XBOX - HOME GAMING	
+2541936	Clic sur Zone NAV Gamers - HOME GAMING	
+2541984	Clic sur Zone NAV Objets à collectionner - HOME GAMING	
+2542000	Clic sur Zone NAV Cartes à jouer - HOME GAMING	
+2557536	AB Test 177091 - Original	
+2557568	AB Test 177091 - Panier Bleu	
+2557584	AB Test 177091 - Panier Light	
+2557600	AB Test 177091 - Payer Seul	
+2557616	AB Test 177091 - Panier Seul	
+2577136	Panier Bleu Click zone one-layout__content	
+2577200	Panier Light - Click zone one-layout__content	
+2577248	Payer Seul - Click zone one-layout__content	
+2577424	Panier Seul - Clic zone Layout	
+2577456	Original - Clic zone Layout	
+2606288	Panier Bleu hover cart	
+2606304	Panier Light - hover cart	
+2606352	Payer Seul - Hover  Cart	
+2606368	Panier Seul - Hover Cart	
+2606384	Original - Hover Cart	
+2620832	Clic sur la zone Fournitures scolaire du menu	
+2626176	Clic sur la zone Fournitures scolaires dans menu burger mobile	
+2686832	Clic sur la zone smart actu - Home Gaming	
+2688256	Clic sur précommandes Home Gaming	
+2688272	Clic sur la zone Parallaxe home gaming	
+2688288	Clic sur Top ventes Home Gaming	
+2688304	Clic sur Licences home gaming	
+2688336	Clic sur vidéo Home Gaming	
+2710384	Arrivée par HP	
+2759568	Survol du Livre dans le menu rich	
+2759632	Clic sur la zone Livre dans menu rich mobile	
+2789840	AAL - Sequential: steps to page "ONE - Etape 3 - Confirmation (connexion+création)" (steps 1, 2, 3 atteintes)	
+2789872	AAL - step 1 toaster connexion = exit page	
+2843360	AAL - AB TEST - [Panier] Estimation livraison v2 - Original	
+2843376	AAL - AB TEST - [Panier] Estimation livraison v2 - Variante 1	
+2843424	AAL - AB TEST - [Panier] Estimation livraison v2 - Variante 2	
+2843472	AAL - AB TEST - [Panier] Estimation livraison v2 - Variante 3	
+2864448	Survolé la zone Loisirs créatifs du menu rich en desktop	
+2888624	​  AAL - AB TEST - [Notif] AddToCart – DESKTOP - Original	
+2888640	AAL - AB TEST - [Notif] AddToCart – DESKTOP – Variante 1 | 797938​	
+2896656	AAL - Click zone Search - search bar - DESKTOP	
+2896672	AAL - Click zone Search - search bar - MOBILE	
+2933504	AAL - sessions avec ajout panier	
+2933552	AAL - sessions avec ajout panier depuis PDP	
+2933568	AAL - sessions avec ajout panier depuis Search	
+2933584	AAL - sessions avec ajout panier depuis PLP	
+2934048	AAL - Clic sur filtres PLP 	
+2936912	AAL - AB TEST - [PDP] - AvisClientsOff - ORIGINAL	
+2936992	AAL - AB TEST - [PDP] - AvisClientsOff - VARIANTE 1 (avis OFF)	
+2941984	AAL – a vu une fiche produit + clic sur Avis – DESKTOP	
+2942000	AAL – a vu une fiche produit SANS clic sur Avis – DESKTOP	
+2942144	AAL – a vu une fiche produit + clic sur Avis – MOBILE	
+2942160	AAL – a vu une fiche produit SANS clic sur Avis – MOBILE	
+2945248	AAL – survol avis clients bas de page	
+2945440	AAL – a vu une fiche produit avec avis client + scroll <50%	
+2949184	AAL - 3x vues d'affilée de l'étape Livraison	
+2949312	AAL - atteinte étape Livraison + erreur API	
+2949344	AAL - atteinte étape Livraison + erreur JS	
+2952944	AAL - 4x vues d'affilée de l'étape Livraison 	
+2952976	AAL - atteinte étape Livraison 	
+2964592	Home LC - Clic sur la NAV Déco de la maison	
+2964624	Home LC - Clic sur la NAV Modelage, Moulage	
+2964816	Home LC - Clic sur la NAV Mercerie créative	
+2964880	Home LC - Clic sur la NAV Création de bijoux	
+2964912	Home LC - Clic sur la NAV Univers de la peinture	
+2964960	Home LC - Clic sur la NAV Supports à décorer	
+2965008	Home LC - Clic sur la NAV Pâtisserie créative	
+2965152	Home LC - Clic sur Zone bannières commerce - LC	
+2965184	Home LC - Clic sur Zone Bannières Actu - LC	
+2965296	Home LC - Clic sur Zone Coup de cœur - LC	
+2965344	Home LC - Clic sur Zone Parallaxe - LC	
+2966272	Home LC - Clic sur Zone Meilleures ventes - LC	
+2966336	Home LC - Clic sur Zone Tutos et sélections - LC	
+2966368	Home LC - Clic sur Zone Nouveautés - LC	
+2966528	Home LC - Clic sur Zone Les communautés - LC	
+2966576	Home LC - Clic sur Zone Les marques - LC	
+2982736	AAL - Sequential ajout panier: steps to page "1- Panier"	
+2982768	AAL - Sequential ajout panier: steps to page "Ajouts panier"	
+2992016	AAL - Click zone - image OU infos produit panier 	
+2995120	AAL - Click zone CTA valider ma commande - étape Paiement	
+3020464	AAL - Sessions avec connexion	
+3020480	AAL - Sessions avec création de compte	
+3020672	AAL - Sessions avec erreur JS	
+3020720	AAL - Sessions avec erreur API	
+3025360	AAL - Click zone CTA ajout panier - produit 1 - PLP	
+3025504	Click zone CTA ajout panier - produit 1 - PLP	
+3028720	AAL - Click zone Trier & Filtrer PLP mobile	
+3028848	AAL - Click zone Toaster filtres mobile	
+3029680	AAL - Ajout panier depuis Search results	
+3029760	Click zone Filtres search result	
+3034992	AAL - Sequential: steps to page "PDP - Ajouts panier" > Exit	
+3061232	AAL - AB TEST - [TDV] PaiementsIndisponibles - Original	
+3061248	AAL - AB TEST - [TDV] PaiementsIndisponibles – Variante 1 | 837040	
+3061264	AAL - AB TEST - [TDV] PaiementsIndisponibles – Variante 2 | 837041	
+3061280	AAL - AB TEST - [TDV] PaiementsIndisponibles – Variante 3 | 837042	
+3061552	AAL - Click zone Récap panier - Paiement	
+3062912	AAL - Click zone CTA 1 ou 2 - valider ma commande	
+3064576	AAL – AB TEST - [Panier] - Estimation livraison V3 | Original	
+3064592	AAL – AB TEST - [Panier] - Estimation livraison V3 | 838184 (Bouton + Toaster)	
+3067808	AAL - AB TEST - [Panier] - Estimation livraison V3 | Original --> passage Panier > Livraison	
+3068352	AAL – AB TEST - [Panier] - Estimation livraison V3 | 838184 (Bouton + Toaster) --> passage Panier > Livraison 	
+3069888	AAL - AB TEST - [Panier] - Estimation livraison V3 | Original --> passage Livraison > Paiement 	
+3069920	AAL – AB TEST - [Panier] - Estimation livraison V3 | 838184 (Bouton + Toaster) --> passage Livraison > Paiement	
+3110688	AAL - Passage Panier > Identification	
+3110704	AAL - Passage Identification > Livraison	
+3110720	AAL - Passage Livraison > Paiement	
+3110736	AAL - Passage Paiement > Confirmation	
+3110784	AAL - Passage Panier > Livraison	
+3110832	AAL - Passage Panier > Confirmation	
+3119728	AAL - SEO Traffic	
+3119872	AAL - Paid Traffic	
+3119888	AAL - Social Media Traffic	
+3119952	AAL - Emailing CRM Traffic	
+3120032	AAL - Direct Traffic	
+3155776	AAL - Bon LCP (<2,5s) - global site	
+3155808	AAL - LCP moyen (entre 2,5s et 4s) - global site	
+3155856	AAL - Mauvais LCP (>=4s) - global site	
+3156032	AP - Utilisateurs ayant utilisé le search	
+3160032	AAL - Sites Referents Traffic	
+3197024	Click zone one-button	
+3197072	Click zone ville ou code postal	
+3199488	Click zone passer au paiement	
+3209760	AAL - LCP >=8s - global site 	
+3209808	AAL - LCP <8s - global site	
+3214224	Users who visited any page and experienced part of a grouped API error 10659065883714460048	
+3237456	AAL - AB TEST - [PDP] - WordingsEresaRelance2 | Original	
+3237472	AAL - AB TEST - [PDP] - WordingsEresaRelance2 | V1 avec wording réassurance - 836396	
+3247168	AAL – AB TEST - [Paiement] CarteCadeau - MontantSolde v2 - 186723 | Original	
+3247200	AAL – AB TEST - [Paiement] CarteCadeau - MontantSolde v2 - 186723 | Variante 1	
+3253280	AAL - CLS bon (<0.1) - global site 	
+3253312	AAL - CLS moyen (entre 0.1 et 0.25) - global site	
+3253328	AAL - CLS mauvais (>0.25) - global site	
+3253776	AAL - LCP entre 4s et 6s - global site 	
+3253824	AAL - LCP entre 6s et 8s - global site 	
+3253888	AAL - LCP entre 8s et 10s - global site	
+3253904	AAL - LCP>10s - global site	
+3254208	AAL - 2 visites successives du Panier 	
+3269296	Click zone Carte cadeau (Cultura, Illicado)
+type de carte*	
+3272896	AAL - Click zone Search bar - menu mobile	
+3275424	AAL - Click zone Menu > univers produits	
+3275776	AAL - Clic Univers produits PUIS search bar menu mobile	
+3275808	AAL - Clic Univers produits PUIS search bar moteur header	
+3322352	AAL - AB TEST - PLP vs Univers JDR - 195385 | Original	
+3322368	AAL - AB TEST - PLP vs Univers JDR - 195385 | Redirection 843751	
+3335728	AAL - Click on zone Single address - champ Pays	
+3342224	AAL - Click zone SINGLE ADDRESS : location selector	
+3360800	AAL - Click zone Menu mobile > UNIVERS PRODUIT	
+3367088	Browser = Firefox	
+3367760	Browser = Safari	
+3367792	Browser = Chrome	
+3367808	Browser = Samsung	
+3367872	Browser = Edge	
+3367888	Browser = Opera	
+3369536	AAL - sessions avec ajout panier | CHROME	
+3369568	AAL - sessions avec ajout panier | SAFARI	
+3369584	AAL - sessions avec ajout panier | FIREFOX	
+3369600	AAL - sessions avec ajout panier | EDGE	
+3369616	AAL - sessions avec ajout panier | SAMSUNG	
+3398448	AAL - Sessions avec connexion au compte client	
+3402224	Click zone Changer d'utilisateur ?	
+3403088	Click zone password-signin	
+3403104	Click zone continuer toaster Connexion	
+3403328	Click zone one-popin__inner__close	
+3404384	Click zone créer mon compte TOASTER	
+3404416	Click zone créer mon compte TOASTER mais sans confirmation création compte	
+3422368	Click zone reinsurances	
+3422384	Click zone reinsurances	
+3422480	Hover zone reinsurances - DESKTOP	
+3432064	AAL - AB TEST - [PDP&PLP] - CoupsdeCoeur (197842) | Coup de Coeur OFF (849281)	
+3445472	Vu Portail RDC	
+3445488	Entrée Portail RDC	
+3457856	MC - PLP Fil à tricoter + Clics filtre N° aiguille	
+3457872	MC - PLP Fil à tricoter et Pas de clics sur filtre	
+3467840	MC - ACA Filtres Fils - Ont cliqué	
+3467856	MC - ACA Filtres Fils - N'ont pas cliqué	
+3467952	MC - ACA Filtres Peintures - Ont cliqué	
+3467968	MC - ACA Filtres Peintures - N'ont pas cliqué	
+3469792	AAL - Click zone checkbox "recevoir la newsletter Cultura"	
+3474800	MC - ACA Filtres Perles - Ont cliqué	
+3474816	MC - ACA Filtres Perles - N'ont pas cliqué	
+3495904	Navigateur safari version inf = 15 clic ajout panier	
+3502528	KT - étapes ajout panier vers la page "1- Panier"	
+3502544	KT - étapes ajout panier sans accès la page "1- Panier" 	
+3503568	AAL - Visite PLP SANS clic sur filtres PLP	
+3503760	AAL - Sessions avec visite PLP	
+3505552	Click zone Formats PDP Ebook	
+3506096	LC - Mobile - Users qui quittent sans interagir avec le formulaire (crea compte)	
+3506496	LC - Desktop - Users qui quittent sans interagir avec le formulaire (création de compte)	
+3509904	Sequential: steps to page "1- Panier" > ajout panier SANS aller dans Panier	
+3509936	Sequential: steps to page "1- Panier"	
+3509952	LC - Desktop - Users qui ont interagi sans soumettre le form. (crea.compte)	
+3509968	LC - Desktop - Users qui ont tenté de soumettre le form. mais échec (crea compte)	
+3509984	LC - Mobile - Users qui ont interagi sans soumettre le form (crea. compte)	
+3510000	LC - Mobile - Users qui ont tenté de soumettre le form, mais échec (crea.compte)	
+3511088	Sequential: steps to page "1- Panier"	
+3511104	Sequential: steps to page "1- Panier"	
+3520960	Click zone Paiement 100% securisé	
+3520992	Click zone valider mon panier	
+3521008	Click zone Paiement 100% securisé	
+3547472	Click zone je valide NEWSLETTER	
+3562304	AAL – AB TEST 196792 - [Toaster] – LoginMDPOublie | Original : 0	
+3562320	AAL – AB TEST 196792 - [Toaster] – LoginMDPOublie | Top : 847044	
+3562336	AAL – AB TEST 196792 - [Toaster] – LoginMDPOublie | Bottom : 847045	
+3562560	[OLD] AAL - Click zone Mot de passe oublié	
+3594800	AAL - order_status = cultura_and_marketplace	
+3594864	AAL - order_status = cultura	
+3594992	AAL - order_status = marketplace	
+3649760	Click zone valider ma commande - CTA CB	
+3649776	Click zone valider ma commande - CTA RECAP	
+3658272	AAL - % des sessions avec création de compte quittent le site après avoir rencontré une erreur API sur la page Livraison	
+3658752	AAL - % des sessions quittent le site après avoir rencontré une erreur API sur la page Livraison 	
+3684672	AAL - Atteinte ebook/apprentissage + Livraison	
+3704400	AAL - Click zone "votre avis" (Mopinion)	
+3704448	AAL - order_status CONTIENT "marketplace"	
+3704608	AAL - Paiement > Click zone Carte bancaire	
+3704624	AAL - Paiement > Click zone 3x ou 4x sans frais	
+3704720	AAL - Paiement > Click zone Paypal	
+3704752	AAL - Paiement > Click zone Carte cadeau	
+3705072	AAL - Paiement > erreurs API & JS	
+3713920	AAL - Global > erreurs API&JS	
+3716640	AAL - Passage Identification > Confirmation 	
+3716800	AAL - Passage Connexion > Confirmation 	
+3716848	AAL - Passage Création compte > Confirmation 	
+3739536	AB TEST - AAL - WordingEresa dévié 100% - 198178 | Variante 849910	
+3748736	AAL - Click zone Mot de passe oublié V1 [avant AB test]	
+3748752	AAL - Click zone Mot de passe oublié V2	
+3748768	AAL - Click zone Mot de passe oublié V2+V1	
+3785024	AAL - Sessions avec atteinte Checkout	
+3788320	AAL - AB TEST - [Search] - FiltresCategories – Searchbar | 202195 – original	
+3788352	AAL - AB TEST - [Search] - FiltresCategories – Searchbar | 202195 – filtres gauche 858963	
+3788368	AAL - AB TEST - [Search] - FiltresCategories – Searchbar | 202195 – droit display 864013	
+3788576	AAL - AB TEST - [Search] - FiltresCategories – Searchbar | 202195 – no filter 859136	
+3788704	AAL - Click zone Tout le catalogue (filtre catégorie search) DESKTOP	
+3794448	AAL - Sessions sans création de compte	
+3794464	AAL - Sessions avec création de compte	
+3796672	Séquence : étapes vers la page "1- Toaster "Création de compte""	
+3798928	AAL - atteinte Checkout > Toaster connexion	
+3798944	AAL - atteinte Checkout > Confirmation connexion	
+3798960	AAL - atteinte Checkout > Toaster création de compte	
+3799008	AAL - atteinte Checkout > Confirmation création de compte	
+3799024	AAL - atteinte Toaster connexion HORS CHECKOUT	
+3799056	AAL - atteinte Confirmation connexion HORS CHECKOUT	
+3799088	AAL - atteinte Toaster création de compte HORS CHECKOUT	
+3799120	AAL - atteinte Confirmation création de compte HORS CHECKOUT	
+3799248	AAL - CHECKOUT : passage toaster connexion > confirmation	
+3799296	AAL - OTHER : passage toaster connexion > confirmation	
+3799328	AAL - CHECKOUT : passage toaster création compte > confirmation	
+3799360	AAL - OTHER : passage toaster création compte > confirmation	
+3799392	A vu la page “2- Confirmation "Création de compte"”	
+3832720	AAL - AB TEST - [Toaster] - OptinCreationCompte | 196874 - ORIGINAL	
+3832736	AAL - AB TEST - [Toaster] - OptinCreationCompte | 196874 - SAME SCREEN 847206	
+3848704	KT - utilisateurs ayant vu une page error 404	
+3851648	AAL - Click zone Carte produit panier mobile	
+3851680	AAL - Click zone Carte produit panier mobile PUIS vue pdp	
+3873696	AP - Segment No result: Saperlipopette 	
+3898592	Texte cultura vous recommande	
+3918912	KT - visiteurs avec une erreur js ou api après avoir vu le toaster de connexion	
+3918928	KT - visiteurs sans une erreur js ou api après avoir vu le toaster de connexion 	
+3919104	KT - visiteurs avec une erreur js ou api après avoir vu confirmation (connexion + création)	
+3919152	KT - visiteurs sans erreur js ou api après avoir vu confirmation (connexion + création) copier	
+3923680	KT - toaster de connexion et ont une erreur 404	
+3969552	N'ont pas vu cvr	
+4009232	AAL - AB TEST - menu mobile sur desktop ID 206901 | variante	
+4015200	AAAL - AB TEST - UX cross format PDP MKP - ID 203542 | variante NewUI	
+4028480	KT- Viste de plus de 10s avec rebond	
+4040240	AAL - PDP en rupture (txt = "recevoir une alerte stock") | stock PDP	
+4040304	AAL - PDP en stock (txt = "en stock en ligne") | stock PDP	
+4046528	Personne qui ont vu "précommande" / Musique	
+4046560	Personne qui ont vu "promotion cd best of" / Musique	
+4079056	AAL - PDP en précommande (txt = "précommande") | stock PDP	
+4079072	AAL - PDP dispo sous X jours (txt = "disponible sous") | stock PDP	
+4079152	AAL - PDP marketplace (txt = "comparer les offres vendeurs") | MKP	
+4087872	piles non incluses	
+4125808	AAL - txt = "paiement refusé"	
+4128064	AAL - Panier mixte > Click zone modifier lieu de livraison	
+4156912	KT - Landing PDP en rupture (txt = "recevoir une alerte stock") | stock PDP (tout trafic)	
+4156960	KT - SEO Landing PDP en rupture (txt = "recevoir une alerte stock") | stock PDP 	
+4156976	KT - PAID Landing PDP en rupture (txt = "recevoir une alerte stock") | stock PDP	
+4156992	KT - Landing PDP en stock (txt = "en stock en ligne") | stock PDP (Global trafic)	
+4157024	KT - Landing PDP dispo sous X jours (txt = "disponible sous") | stock PDP (Global trafic)	
+4157040	KT - SEO Landing PDP dispo sous X jours (txt = "disponible sous") | stock PDP (Global trafic)	
+4157056	KT - PAID Landing PDP dispo sous X jours (txt = "disponible sous") | stock PDP (Global trafic)	
+4159056	[FASTERIZE] Cookie_fstrz = true	
+4159072	[FASTERIZE] Cookie_fstrz = false	
+4185168	KT - PDP en précommande (txt = "précommande") | stock PDP	
+4185232	KT - Landing PDP en précommande (txt = "précommande") | stock PDP	
+4185264	KT - SEO Landing PDP en précommande (txt = "précommande") | stock PDP	
+4185296	KT - PAID Landing PDP en précommande (txt = "précommande") | stock PDP	
+4194544	KT - PDP avec un Vendeur Market Place (En stock vendeur) et à "Ajouter au panier"	
+4201344	KT - PDP avec  "coups de coeur"	
+4219248	KC - PDP en stock mutualisé (txt = "disponible a partir du") | stock PDP	
+4260480	AP - Result page - indisponible en ligne	
+4260720	AP - Result page - disponible sous x	
+4267216	undefined is not an object (evaluating ‘window_uxa.push’)	
+4268240	The consumer isn't authorized to access %resources	
+4268256	KT - [paiement] Internal Error. Details are available in Magento log file. Report ID: webapi-	
+4269024	Certains produits sont en rupture de stock. Merci de mettre à jour le contenu de votre panier	
+4290608	AAL - Erreur paiement 401 POST - 14763519063449069969	
+4290624	AAL - Erreur connexion Safari 403 GET - 16257682168719612307	
+4292720	KT - Erreur "L\'utilisateur courant ne peut pas effectuer d\'opération sur le panier"	
+4293408	AAL - Erreur connexion 401 POST /authn	
+4294032	Click zone valider livraison 	
+4295072	kt - Qui ont vu le message "erreur de mot de passe"	
+4297056	AAL - PDP "Vendu et expédié par : Cultura"	
+4298368	AAL - Erreur JS ajout panier PLP | iOS, MacOS	
+4301968	AAL - Click zone modifier adresse étape Livraison	
+4304080	KT - merge panier qui ont vu "Mise à jour de votre panier"	
+4304096	KT - merge panier qui ont vu "Mise à jour de votre panier" et ont vu le panier	
+4304112	KT - merge panier qui ont vu "Mise à jour de votre panier" et n'ont pas vu le panier	
+4304656	KT - merge panier qui n'ont pas vu "Mise à jour de votre panier" et ont vu le panier 	
+4306576	AAL - text seen = "Mise à jour de votre panier" | CHECKOUT	
+4306928	AAL - MAJ PANIER ? Click zone NON	
+4306944	AAL - MAJ PANIER ? Click zone OUI	
+4306960	AAL - MAJ PANIER ? click fermer toaster	
+4318848	AAL - Merge panier : Click zone oui - all pages	
+4318864	AAL - Merge panier : Click zone non- all pages	
+4319456	AAL - erreur mdp	
+4320144	AAL - 403 POST 14380663481714862483 - Création compte	
+4322576	AAL - Erreur 409 POST 12404095021897935257 - Création compte	
+4324368	AAL - erreur 400 POST 12404095021897935248	
+4348128	KT - HOME PAGE TAUX DE CLIC BANNIERE SLIDER [DESKTOP]	
+4349488	KT - HOME PAGE TAUX DE CLIC CARROUSEL LITTERATURE [DESKTOP]	
+4349552	KT - HOME PAGE TAUX DE CLIC CARROUSEL NAVIGATION [DESKTOP]	
+4349584	KT - HOME PAGE TAUX DE CLIC CARROUSEL PRODUIT ACTU DU MOMENT [DESKTOP]	
+4349600	KT - HOME PAGE TAUX DE CLIC COMPOSANT NOS SELECTIONS [DESKTOP]	
+4349616	KT - HOME PAGE TAUX DE CLIC CARROUSEL BANNIERES [DESKTOP]	
+4349664	KT - HOME PAGE TAUX DE CLIC CARTES INSPIRATIONS [DESKTOP]	
+4351568	KT - HOME PAGE TAUX DE CLIC SLIDER BANNIERES [MOBILE]	
+4351600	KT - HOME PAGE TAUX DE CLIC CARROUSEL LITTERATURE [MOBILE]	
+4351616	KT - HOME PAGE TAUX DE CLIC COMPOSANT NAVIGATION [MOBILE]	
+4351648	KT - HOME PAGE TAUX DE CLIC CARROUSEL PRODUIT L4ACTU A LA LOUPE [MOBILE]	
+4351664	KT - HOME PAGE TAUX DE CLIC SELECTIONS DU MOMENT [MOBILE]	
+4351680	KT - HOME PAGE TAUX DE CLIC CARROUSEL BANNIERES [MOBILE]	
+4351696	KT - HOME PAGE TAUX DE CLIC CARTES INSPIRATION [MOBILE]	
+4359792	AAL - AB - [Search] - NoResult avec metiers ID 210148 - original	
+4359840	AAL - AB - [Search] - NoResult avec metiers ID 210148 - variante Métiers 875506	
+4363472	KT - ont rencontré une erreur "le montant payé ne correspond pas au montant de la commande"	
+4368384	KT - Erreur 500 Paiement  14763519063449070068	
+4378432	Kameleoon 216521 - version originale	
+4378464	Kameleoon 216521 - Produits/Motsclés/Catégorie	
+4378480	Kameleoon 216521 - Produits/Cat/Mots clés	
+4378528	Kameleoon 216521 - Cat/Mots clés/Produits	
+4382336	KT - Erreur paiement "le montant payé ne correspond pas au montant de la commande" (2693)	
+4384832	KT - (FEAT_ONE-429) ERREUR paiement refué	
+4384880	KT - (FEAT_ONE-429) ERREUR Response not successful: Received code 400	
+4384992	KT - (FEAT_ONE-429) ERREUR "Suite à un problème technique, nous ne sommes pas en mesure de	
+4386528	AAL - AB TEST - [PLP&Search] Valorisation des filtres sur mobile | Original - 213591	
+4386560	AAL - AB TEST - [PLP&Search] Valorisation des filtres sur mobile | One button - 883438 	
+4386576	AAL - AB TEST - [PLP&Search] Valorisation des filtres sur mobile | Two buttons - 883439	
+4387728	Click zone Trier & Filtrer 	
+4388016	KT - ABTEST SEARCH Produits/Motsclés/Catégorie 891782	
+4388192	KT - ABTEST SEARCH Produits/Catégorie/motsclés 891788	
+4388208	KT - ABTEST SEARCH Catégorie/Motclés/Produits 891819	
+4388224	KT - ABTEST SEARCH ORIGINALE Produits/Motsclés/Catégorie	
+4396624	Click zone Pate a sucre
+	
+4396832	AAL - AB TEST - [Search] - NoResult avec metiers | 210148 - original	
+4396848	AAL - AB TEST - [Search] - NoResult avec metiers | 210148 - 875506 - variante	
+4396944	Click zone métier no result AB test 210148	
+4402464	L'utilisateur courant ne peut pas effectuer d'opération sur le panier ROAEM-15166	
+4408176	AB_Kameleoon_216421_reference	
+4408240	AB_Kameleoon_216421_891604	
+4408416	AB_Kameleoon_216421_891605	
+4409728	Click zone cultura-new-element	
+4409744	Click zone cultura-new-element	
+4412240	KT - ERREUR API 504 GET HOME PAGE 11240446904622848504	
+4412256	KT - Erreur API 504 GET HOME PAGE 10549975722068023800	
+4412272	KT - ERREUR API 400 bad Request PDP 10659065883714460048	
+4412288	KT - ERREUR API 504 Get away time out t PDP 11240446904622848504	
+4412320	KT - ERREUR API 400 bad request Paiement 5941883334454929808	
+4415680	KT - ERREUR TEXTE window._uxa.push	
+4441280	KT - utilisateurs qui on connu un LCP sup à 4s	
+4443504	KT - Bug au paiment	
+4466384	erreur 500 search	
+4466976	erreur api 403 get	
+4467008	erreur api 413 - get	
+4467152	L'utilisateur courant ne peut pas effectuer d'opération sur le panier	
+4467200	Certains produits sont en rupture de stock	
+4488800	Suggets adress 500	
+4488816	Validate adress 500	
+4495792	KT - 400 bad request GET	
+4496992	erreur api 502 connexion	
+4515968	KT - % de complétion Livraioson / Paiement	
+4516368	KT - Taux de clic sur les produits	
+4516384	KT - Taux de clic sur la SEARCH BaRRE	
+4529152	KT - erreur API Single Adress /bin/address.json/ 	
+4531920	KT - erreur API Single Adress /bin/address.json/  2525339091243309556	
+4531952	KT - erreur API Single Adress /bin/address.json/  15331167337669270004	
+4544784	KT - produits en rupture de stock au panier	
+4548112	Click zone choix mag checkout	
+4548144	Click zone Map Data
+Terms
+Report a map error	
+4549872	Click zone mapStore	
+4553520	KT - erreur paiement "Aucune entité avec	
+4555552	Click zone Plan	
+4555584	Click zone En magasin - livraison	
+4555824	Click zone Map Data
+Terms
+Report a map error	
+4560048	KT - PDP > Ajout panier > paiement	
+4560064	KT - PLP > Ajout panier > paiement	
+4560080	KT - PLP >PDP >  Ajout panier > paiement 	
+4560096	KT - Search  >PDP >  Ajout panier > paiement 	
+4567504	FVI - JDS&Puzzles LUDO - GLOBAL	
+4573136	AAL - erreur paiement > Aucune entité avec %fieldName=%fieldValue	
+4576256	AF - atteinte étape Paiement	
+4580880	AAL - "Timeout exceeded" pendant Identification	
+4581056	AAL - "Aucune entité avec orderId"	
+4581984	AAL - AB TEST - [PLP&Search] Valorisation des filtres sur mobile | 2 BUTTONS 883439 - 213591 	
+4585648	KT - qui ont vu 4 fois la page "3- Livraison"	
+4595248	KT - script error JS "ont vu plus de 4 fois la page de livarison"	
+4601360	AAL – AB TEST - [Panier] – PictosPaiement DESKTOP – 216152 | Original 	
+4601392	AAL – AB TEST - [Panier] – PictosPaiement DESKTOP – 216152 | V1 Pictos - 891022	
+4601408	AAL – AB TEST - [Panier] – PictosPaiement MOBILE – 217171 | Original 	
+4601424	AAL – AB TEST - [Panier] – PictosPaiement MOBILE – 217171 | V1 Pictos – 893310	
+4601440	AAL – AB TEST - [Panier] – PictosPaiement MOBILE – 217171 | V2 Sticky - 893312	
+4603056	KC - a vu PDP batterie Shiver EDS 2 (IM)	
+4603488	AAL – AB TEST – [Création de compte] Vérifier ses spams – 218161 | Original 	
+4603504	AAL – AB TEST – [Création de compte] Vérifier ses spams – 218161 | V1 help text - 895339  	
+4604032	KT SEARCH Position du curseur ORIGINALE	
+4604080	KT SEARCH Position du curseur DELETE	
+4609520	KT -nClic sur la zone one-search-tags	
+4615792	KT API Erreur  11240446904622901748 page de livraison qui ne se charge pas	
+4630304	KT SEARCH Position du curseur FIN	
+4630528	KT SEARCH Position du curseur FIN	
+4638816	KT -  page vue “1- Toaster "Création de compte"” et n'ont pas vu la confirmation de création	
+4639040	KT -  page vue “1- Toaster "Création de compte"” et ont vu la confirmation de création	
+4639328	KT -  page vue “1- Toaster "Création de compte"”	
+4639488	KT - page vue “1- Toaster "Connexion"” et ne confirment pas la connexion	
+4639856	AAL – AB TEST - [TDV] Slider Recos Produits Panier – 212564 | V1 - Slider	
+4656144	TL - a recherché "cd" pendant sa visite	
+4668656	KT - Toaster connexion - HP - Toaster de connexion (Connexion fail)	
+4671360	KT - Page de sortie suite à la création de compte fail dans le tunnel	
+4672432	KT - erreur authentification  https://www.cultura.com/api/login/CS_ANONYMIZED_EMAIL	
+4674704	AAL - "aucune entité avec"	
+4677984	AAL - 400 Bad Request GET - 10659065883714460048	
+4689632	KT - A vu la page panier complétion tunnel	
+4689648	KT - A vu la page livraison complétion tunnel	
+4689664	KT - A vu la page paiement complétion tunnel	
+4721520	KT - ERREUR API 403 POSTt Tunnel 11240446904622901651	
+4730720	Click zone conseilaccueil	
+4733936	Click zone Laissez-vous inspirer
+
+L'actualité à la loupe	
+4734080	Click zone container	
+4735536	Click zone choisir un magasin	
+4735808	Clic sur la zone one-header__nav__inner (MENU)	
+4743312	Pas vu "Votre demande d'annulation"	
+4751120	kt - message alerte "la quantité totale demandée est supérieure à la quantité totale disponible"	
+4763216	ACA - Sessions Univers ACA	
+4780336	Clic sur la zone Bloc reco	
+4783648	MC - Moteur de recherche ACA	
+4800336	KT - [SEARCH] AB auto-complete horizontal variante sur la zone Mots clés	
+4800384	KT - [SEARCH] AB auto-complete horizontal variante sur la zone Catégories	
+4800400	KT - [SEARCH] AB auto-complete horizontal variante sur la zone Produits	
+4800560	KT - [SEARCH] AB auto-complete horizontal référente clic zone produits	
+4800576	KT - [SEARCH] AB auto-complete horizontal référente Clic sur la zone tags-categories-searchbar-loading	
+4800592	KT - [SEARCH] AB auto-complete horizontal référente Clic sur la zone mots clés	
+4801984	 [SEARCH] AB GLOBAL auto-complete horizontal variante	
+4802016	 [SEARCH] AB GLOBAL auto-complete horizontal referente	
+4802416	 [SEARCH] AB GLOBAL auto-complete horizontal referente Clic sur la zone produits	
+4807008	Clic sur la zone SEARCH Filtrer Trier / SEARCH Filtres	
+4845536	[HOMEMobile] - Position du composant métiers	
+4845584	[HOMEMobile] - Position du composant métiers Clic sur la zone Menu navigation	
+4845600	[HOMEMobile] - Position du composant métiers Clic sur la zone Menu navigation	
+4845648	[HOMEMobile] - Position du composant métiers variante	
+4845712	[HOMEMobile] - Position du composant métiers variante Clic sur la zone composant categ	
+4845728	[HOMEMobile] - Position du composant métiers variante Clic sur la zone composant categ	
+4846544	kt - "message GSM au panier" : Suite à un problème technique, nous ne sommes pas en mesure de vous faire bénéficier	
+4848688	VARIANTE AB TEST posistion composant HOME Clic sur la zone composant navigation	
+4865488	ACA - Sessions Univers Modelage - Moulage	
+4867360	ACA - Sessions Univers Pâtisserie	
+4867504	AAL - Clic sur la zone Menu (all pages)	
+4873920	Erraur panier Ce produit n'est plus disponible, veuillez le supprimer	
+4878272	KT - Search  >PLP > PDP >  Ajout panier > paiement	
+4878288	KT - Search  >PLP > Ajout panier > paiement 	
+4882352	KT - message erreur "Une erreur est survenue. Merci de réessayer plus tard"	
+4894976	AAL - Clic sur la zone "?" code usage carte cadeau	
+4895680	Séquence : étapes vers la page "4- Paiement"	
+4897376	Clic sur la zone footersimplified	
+4897424	Clic sur la zone footersimplified2	
+4897440	Clic sur la zone footersimplified	
+4908560	AAL - Clic sur la zone Suivant (post MEP) OU clic sur bouton Suivant	
+4920160	LIVRE - Sessions Univers livre	
+4921200	LIVRE - Sessions univers BD, MANGA, COMICS	
+4942032	KT - Saperlipopette	
+4953072	clients qui ont un magasin à l'arrivée sur le site	
+4955264	clients qui n'ont pas de magasin à l'arrivée sur le site 	
+4995120	Clic sur la zone AUTOCOMPLETE > one-header-search-content-container	
+5004240	Clic sur la zone Carte cadeau (Cultura, Illicado) - AAL 27/02	
+5028240	KT - Utilisateurs qui ont confirmé leur livraison	
+5028272	KT - Utilisateurs qui ont confirmé leur commande	
+5028496	kt - "paiement refusé, veuillez réessayer avec un autre mode ..."	
+5050096	Clic sur la zone à 47000 - Cultura Agen 	
+5050128	Clic sur la zone à 47000 - Cultura Agen 	
+5051536	Clic sur la zone INFOBULLE PAIEMENT	
+5056336	HDC Quantités Mini au Panier	
+5056368	Texte vu = "Quantité minimum d'achat" sur les PDP	
+5056960	HDC PAPET Quantités Mini au Panier	
+5058976	Vue PDP "Batterie électronique EDS-2 - Shiver" - https://www.cultura.com/p-shiver-eds-2-batterie-electronique-3700408404833.html	
+5059664	FVI - JEUX&JOUETS - GLOBAL	
+5073888	HDC PAPET Quantités Mini au Panier - E RESA	
+5078400	Retrait 2h mag ERESA	
+5078416	AGA - Quantités Mini Panier + ERESA	
+5078960	KC - erreur texte RECO	
+5081536	KITS - ajouts panier	
+5090064	AGA - KITS - Clic sur la zone ajouter le kit	
+5129424	[GLOBAL SITE] Erreur API 404 GET /checkip depuis la MEP du 12/03/2024	
+5130848	KT - landing PDP livre	
+5141264	KT - landing PDP livre avec un texte vu "disponible sous"	
+5141696	[PDP] Redirection cross format et cross édition	
+5142048	CLIC RECO PDP JDS	
+5151216	AAL - PDP - Texte "Désolé, il est impossible d'ajouter ce produit dans votre panier"	
+5151344	AAL - PLP - Texte "Désolé, il est impossible d'ajouter ce produit dans votre panier"	
+5151456	AAL - SERP - Texte "Désolé, il est impossible d'ajouter ce produit dans votre panier" 	
+5151536	AAL - TDV - Texte "Ce produit n'est plus disponible"  	
+5189984	AAL - Clic sur la zone se déconnecter_DESKTOP	
+5199392	Hover on zone one-product	
+5296208	AAL - AB TEST - Bouton choix magasin - ID 235786	
+5296320	AAL - AB TEST - Validation code postal - ID 168124	
+5296384	AAL - AB TEST - Valorisation des cartes cadeaux - ID 232690	
+5296416	AAL - AB TEST - Pictos vers mots - ID 234185	
+5296480	AAL - AB TEST - Paiements indisponibles - ID 213911	
+5299248	AAL - AB TEST - [MKP] - PDP - UXFormatsV3 - ID 213574	
+5299648	AAL - AB TEST - Menu mobile sur desktop - ID 206901	
+5299792	AAL - AB TEST - Menu mobile sur desktop - ID 214214	
+5299872	AAL - AB TEST - FAQ Etape panier v3 - ID 228870	
+5300560	AAL - Atteinte PDP	
+5300608	AAL - Atteinte checkout	
+5300688	AAL - Atteinte toaster identification (connexion ou création)	
+5309376	AAL - Clic sur Menu burger	
+5333440	Texte "wonderbox" sur la page panier	
+5333456	TL - Achat wonderbox panier	
+5338592	AAL&KT - Clic sur autocomplete PUIS vue PDP / PLP	
+5360768	Clic sur la zone Pagination	
+5380176	Clic sur la zone conseilaccueil	
+5381568	AAL - Clic sur la zone mon panier (ajout panier)	
+5381584	AAL - Clic sur la zone voir mon panier (mini cart)	
+5420944	Clic sur la zone 1
+2
+3
+4
+5
+6
+7	
+5453072	JB - Achat figurines vidéo	
+5527600	kt prix à 0€ sur pdp	
+5529984	kt  - certains produits sont en 	
+5642884	SA - A été sujet à l'erreur autocomplete	
+5642888	SA - N'a pas été sujet à l'erreur autocomplete 	
+5645720	KT - % de complétion Paiement/ confirmation	
+5645824	KT - texte vu "source_cart_id" is missing"	
+5646220	SA - a pas connu d'erreur JS	
+5646224	SA - a pas connu d'erreur API	
+5646260	IM - vues piano YDP 145	
+5646452	SA - N'a pas vu "Certains produits sont en rupture de stock "	
+5650712	SA - erreur 412 precondition failed 10659065883714460060	
+5650724	SA - a pas connu erreur 412 precondition failed 10659065883714460060	
+5651756	Uilisateurs qui ont cliqué sur "Supprimer" un produit du panier	
+5651892	SA - A cliqué sur supprimer et n'a pas converti	
+5653004	ZONINGS.SEGMENT_PANEL.CREATE_CLICK	
+5653020	ZONINGS.SEGMENT_PANEL.CREATE_CLICK	
+5653200	SA - AB test 253785 Reference	
+5653204	SA - AB test 253785 Top	
+5653208	SA - AB test 253785 Bottom	
+5653844	MC - Sessions Papeterie PLP	
+5654668	SA - A ajouté une nouvelle adresse postale	
+5654672	SA - A modifié son adresse postale	
+5657648	AGA - RDC Fournitures Scolaires	
+5658068	AGA - RDC Bagagerie	
+5659904	SA - A cliqué sur les tendances du moment sur la page de no result	
+5663560	SA - Sessions Papeterie PLP ou PDP	
+5664532	AGA - RDC Écriture	
+5666416	AGA - RDC Agendas	
+5668336	AGA - Beaux-Arts	
+5668340	AGA - JEUX-JOUETS (pas de LCE)	
+5668344	AGA - LCE	
+5668756	SA - A vu erreur API 10549975722068023696	
+5668856	SA - A cliqué sur Numéro service client	
+5670220	SA - A vu erreur API 5440590493853346192	
+5671852	Taux de no result	
+5671928	AP - Clic search bar	
+5673092	SA - Mauvais FID (>=60ms) - global site	
+5679428	SA - Livraison en magasin et transaction 	
+5679444	SA - Livraison à domicile et transaction 	
+5679448	SA - Livraison en point retrait et transaction	
+5679520	SA - Livraison Express et transaction	
+5681000	KT - [Search New UI] Mots clés suggestion de recherche	
+5681004	KT - [Search New UI] Entités suggestion de recherche	
+5681008	KT - [Search New UI] Marques & licences suggestion de recherche	
+5681012	KT - [Search New UI] Produits suggestion de recherche	
+5681016	KT - [Search New UI] Voirs tous les résultats	
+5681020	KT - [Search New UI] Produits uniquements suggestion de recherche	
+5681032	KT - [Search New UI] Auto-xomplete hors barre de recherche	
+5681516	ZONINGS.SEGMENT_PANEL.CREATE_CLICK	
+5684436	SA - Exclusion bot	
+5685756	KT - Barre de recherche [SEARCH New UI]	
+5685760	KT - Mots clés [SEARCH New UI]	
+5685764	KT - Entités [SEARCH New UI]	
+5685768	KT - Marques [SEARCH New UI]	
+5685772	KT - Produits [SEARCH New UI]	
+5685776	KT - Produits + CTA [SEARCH New UI]	
+5685780	KT - CTA 'Voir tout...' [SEARCH New UI]	
+5685784	KT - Full search [SEARCH New UI]	
+5685788	KT - Full auto-complete [SEARCH New UI]	
+5688292	Search bar mobile	
+5688296	search bar desk 	
+5688708	SA - Livraison à domicile et complétion Livraison > Paiement	
+5688712	SA - Livraison express et complétion Livraison > Paiement	
+5688716	SA - Livraison en point retrait et complétion Livraison > Paiement	
+5688720	SA - Livraison en magasin et complétion Livraison > Paiement	
+5688744	SA - Nouveaux utilisateurs et complétion Livraison > Paiement 	
+5688756	SA - Anciens utilisateurs et complétion Livraison > Paiement  copier	
+5688800	SA - Systeme ex. IOS 	
+5688804	SA - Systeme ex. Android 	
+5688808	SA - Systeme ex. Windows	
+5688812	SA - Systeme ex. Mac OS 	
+5688816	SA - Navigateur Chrome 	
+5688848	SA - Navigateur Samsung	
+5688856	SA - Navigateur Firefox	
+5688864	SA - Navigateur Safari	
+5688956	SA - Complétion Livraison > Paiement et panier marketplace 	
+5688964	SA - Complétion Livraison > Paiement et panier cultura	
+5688968	SA - Complétion Livraison > Paiement et panier cultura/marketplace	
+5689008	SA - a connu une erreur API et complétion Livraison > Paiement	
+5689012	SA - a connu une erreur JS et complétion Livraison > Paiement 	
+5689156	SA - A vu "Certains produits sont en rupture de stock " et complétion Livraison > Paiement	
+5689172	SA - N'a pas vu "Certains produits sont en rupture de stock " et complétion Livraison > Paiement 	
+5690000	SA - N'a pas connu une erreur API et complétion Livraison > Paiement	
+5690004	SA - N'a pas connu une erreur JS et complétion Livraison > Paiement	
+5690052	SA - LCP moyen (entre 2,5s et 4s) et complétion Livraison>Paiement	
+5690072	SA - Mauvais LCP (>=4s) et complétion Livraison>Paiement	
+5690108	SA - Bon LCP (<2,5s) et complétion Livraison>Paiement	
+5690316	SA - Exclusion bot et complétion Livraison>Paiement	
+5690424	SA - a connu une erreur API à l'étape Livraison	
+5690440	SA - a connu une erreur JS à l'étape Livraison	
+5690520	SA - LCP moyen (entre 2,5s et 4s) à l'étape Livraison	
+5690524	SA - LCP mauvais (> 4s) à l'étape Livraison 	
+5690556	SA - Bon LCP (<2,5s) à l'étape Livraison	
+5691000	SA - Clic sur livraison en magasin 	
+5691020	SA - Clic sur livraison en point retrait	
+5691024	SA - Clic sur livraison à domicile	
+5691708	SA - Sessions avec erreur JS à l'étape Livraison	
+5691804	SA - Sessions avec erreur API à l'étape Livraison 	
+5692020	SA - Mauvais LCP (>=4s) à l'étape Livraison	
+5692100	SA - N'a pas connu une erreur JS à l'étape Livraison	
+5692112	SA - a pas connu d'erreur API à l'étape Livraison	
+5692288	SA - A vu "Certains produits sont en rupture de stock " à l'étape Livraison	
+5693492	KT -  [PANIER ) Enregistrement adresse de livraison (case à cocher)	
+5695812	KT - Ce produit n'est plus disponible, veuillez le supprimer	
+5699100	KT - L'utilisateur courant ne peut pas effectuer d'opération sur le paniersu	
+5701948	KT - erreur toaster création de compte	
+5702812	KT -  L'utilisateur courant ne peut pas effectuer d'opération sur le panie	
+5702832	KT - Non pas vu L'utilisateur courant ne peut pas effectuer d'opération sur le panie copier	
+5703480	SA - Ajout panier sans suppression et "votre panier et vide"	
+5703532	SA - Ajout panier sans suppression et n'a pas vu  "votre panier et vide" 	
+5703540	SA - FID > 70 	
+5703552	SA - FID < 70 	
+5705180	SA - Clic sur filtres Search page	
+5715952	Taux de clic sur optin dans la création de compte	
+5720276	SA - Erreur API Mirakl - ID 5307163729147730324 - TEAM_WEB-4322 	
+5720280	SA - Erreur API - ID 14763519063449069969 - Ticket: TEAM_WEB-4319	
+5720288	SA - Erreur API Magento - ID 14763519063449070068 - TEAM_WEB-4318	
+5720420	SA - Erreur API | Code front ne s'affiche pas - ID 10659065883714460060- TEAM_WEB-4347	
+5720472	SA - Erreur API |Toaster création charge sans fin - ID 12404095021897935248- TEAM_WEB-4340	
+5720568	SA - Internal Error. Details are available in Magento log file.	
+5720636	SA - Internal server error. 	
+5721480	KT - cliquer passer au paiement bloc de droite et pas vu le paiement	
+5721488	KT - Cliquer Passer au paiement bloc de gauche et ont vu la page paiement	
+5721492	KT - cliquer passer au paiement bloc de droite et ont vu le paiement 	
+5721496	KT - Cliquer Passer au paiement bloc de gauche et ont pas vu la page paiement copier	
+5721696	SA - Clique sur cta étape paiement mais ne va pas à l'étape Paiement	
+5723756	SA - message erreur "Une erreur est survenue lors de la création de votre compte."	
+5728472	SA - Qui ont vu le message "La page est en cours de chargement" 	
+5728580	SA - NON SUJET Erreur API |Toaster création charge sans fin - ID 12404095021897935248- TEAM_WEB-4340 	
+5728608	SA - NON SUJET Erreur API Mirakl - ID 5307163729147730324 - TEAM_WEB-4322  copier	
+5728612	SA - NON SUJET Erreur API Magento - ID 14763519063449070068 - TEAM_WEB-4318 copier	
+5728780	SA - NON SUJET message erreur "Une erreur est survenue lors de la création de votre compte." 	
+5728796	SA - NON SUJET Clique sur cta étape paiement mais ne va pas à l'étape Paiement copier	
+5729068	SA - NON SUJET Erreur API - ID 14763519063449069969 - Ticket: TEAM_WEB-4319 copier	
+5729072	SA - Erreur API - ID 14763519063449069969 - Ticket: TEAM_WEB-4319 copier	
+5729080	SA - PAS SUJET Internal Error. Details are available in Magento log file. copier	
+5729088	SA - PAS SUJET L'utilisateur courant ne peut pas effectuer d'opération sur le panier ROAEM-15166 	
+5729108	SA - Qui n'ont pas vu le message "La page est en cours de chargement"  	
+5729112	SA - Exclusion bot + Erreur API | Code front ne s'affiche pas - ID 10659065883714460060- TEAM_WEB-4347 	
+5729116	SA -PAS SUJET Internal server error.  	
+5729144	SA - a cliqué sur supprimer un produit du panier	
+5729192	SA - Panier plein puis connexion et panier vide	
+5729320	SA - Panier plein puis connexion et panier PAS vide	
+5730720	FVI - VESTIAIRE CREATIF	
+5731416	KT teste vu Internal	
+5732976	SA - Sessions avec erreur JS à l'étape Paiement	
+5732992	SA - Sessions avec erreur API à l'étape Paiement	
+5733008	SA - A vu "Certains produits sont en rupture de stock " à l'étape Paiement	
+5733408	CS Support - Ticket #77619	
+5739480	SA - A vu "Paiement refusé, veuillez réessayer avec un autre mode "	
+5739512	SA - A vu "The cart isn't active" 	
+5739536	SA - N'a pas vu "The cart isn't active" 	
+5739540	SA - N'a pas vu "Paiement refusé, veuillez réessayer avec un autre mode " 	
+5740448	FVI - MAISON DES CREATEURS	
+5741080	SA - A vu "The item couldn't be removed from the quote"	
+5741084	SA - N'a pas vu "The item couldn't be removed from the quote" 	
+5741116	SA - N'a pas vu PLP - Texte "Désolé, il est impossible d'ajouter ce produit dans votre panier" 	
+5741324	KT - message création de compte	
+5741724	SA - Panier + "Ajout panier" 	
+5741732	SA - Panier to PDP	
+5741812	SA - test 259866 v1	
+5741816	SA - test 259866 ref	
+5741824	SA - Panier + "Ajout panier"  ET AB test 259866 v1	
+5741828	SA - Panier + "Ajout panier"  ET AB test 259866 ref	
+5741840	SA - Panier to PDP ET AB 259866 v1	
+5741844	SA - Panier to PDP ET AB 259866 ref	
+5742420	SA - A vu "postcode is required"  	
+5742424	SA - N'a pas vu "postcode is required"   	
+5742452	SA - PLP - N'a pas vu Texte "Désolé, il est impossible d'ajouter ce produit dans votre panier" et Ajout panier	
+5742492	KT - Fail création , échec n'ont pas vu le toaster de confirmation	
+5742504	KT - NOT Fail création , échec ont vu le toaster de confirmation 	
+5743940	SA - LCP moyen (entre 2,5s et 4s) à l'étape Panier	
+5743944	SA - Mauvais LCP (>=4s) à l'étape Panier	
+5743948	SA - Bon LCP (<2,5s) à l'étape Panier	
+5743960	SA - Bon LCP (<2,5s) à l'étape Paiement	
+5743964	SA - LCP moyen (entre 2,5s et 4s) à l'étape Paiement	
+5743972	SA - Mauvais LCP (>=4s) à l'étape Paiement	
+5743976	SA - N'a pas connu erreur JS à l'étape Paiement 	
+5743992	SA - Sessions avec erreur JS à l'étape Panier	
+5744000	SA - N'a pas connu erreur JS à l'étape Panier	
+5744040	SA - a connu une erreur API à l'étape Panier	
+5744044	SA - N'a pas connu une erreur API à l'étape Panier	
+5744108	SA - Test survol zone bug livraison	
+5744112	SA - test bug Livraison au scroll	
+5744272	SA - test 2 bug livraison au survol	
+5744308	SA - survol de la page livraison	
+5744400	SA - Ajout wishlist	
+5749724	SA - Ajout eresa	
+5749844	SA - A vu message "Les deux mots de passe saisis doivent être identiques"	
+5750384	SA - 404 après clic sur produis AMA	
+5750720	SA - Ne clique pas sur "Nom" page Paiement	
+5752208	AAL - pas vu txt = "paiement refusé" 	
+5752660	Erreur API 500 (Cart) 	
+5753608	SA - A vu "L'utilisateur courant ne peut pas effectuer d'opération sur le panier" 	
+5754076	SA - A vu "Une erreur est survenue. Merci de réessayer plus tard."	
+5754080	SA - PAS SUJET "Une erreur est survenue. Merci de réessayer plus tard."	
+5754384	SA - Paiement > Click zone 3x ou 4x sans frais et vu "The cart isn't' active"	
+5754392	SA - Paiement > Click zone 3x ou 4x sans frais et vu "Paiement refusé"	
+5754404	SA - Paiement > Click zone Paypal et "cart isnt' active"	
+5754408	SA - Paiement > Click zone Paypal et "paiement refusé"	
+5754416	SA - Paiement > Click zone Carte bancaire et "cart isnt' active	
+5754420	SA - Paiement > Click zone Carte bancaire et "paiement refusé"	
+5754440	SA - Paiement > Click zone 3x ou 4x sans frais puis vu "Votre panier est vide"	
+5754692	SA - Non sujet AB test	
+5754700	SA - Sujet AB test 	
+5754736	SA - Non sujet AB test et erreur API/JS	
+5754744	SA - Sujet AB test  et erreur JS/API	
+5754752	SA - Sujet AB test  260507	
+5754756	SA - Non sujet AB test  260507 	
+5757156	AGA - JDS	
+5758268	SA - clics multiples étape Livaison	
+5758348	SA - NON SUJET clics multiples étape Livaison	
+5758872	SA - A vu "L'ajout au panier n'a pas pu être effectué. Veuillez essayer à nouveau."	
+5758880	SA - N'a pas vu "L'ajout au panier n'a pas pu être effectué. Veuillez essayer à nouveau." 	
+5759204	SA - A vu "L'action n'a pas pu être effectuée. Veuillez essayer à nouveau."	
+5759208	SA - N'a pas vu "L'action n'a pas pu être effectuée. Veuillez essayer à nouveau." 	
+5762088	SA - A vu "The client specified not to prompt but the user is not logged in."	
+5762092	SA - N'a pas vu "The client specified not to prompt but the user is not logged in." 	
+5769328	SA - Erreur API 14380663481714862481	
+5769332	SA - Non sujet Erreur API 14380663481714862481 copier	
+5769540	SA - Erreur JS 9549186690580271584 	
+5769544	SA - Non sujet Erreur JS 9549186690580271584  	
+5769664	SA - A vu paiement refusé	
+5769676	SA - PAs vu paiement refusé	
+5771332	SA - A vu Cet ebook n'est pas encore paru et la précommande n'est pas disponible. Merci de renouveler votre achat le jour de la sortie de ce titre.	
+5771336	SA - A pas vu Cet ebook n'est pas encore paru et la précommande n'est pas disponible. Merci de renouveler votre achat le jour de la sortie de ce titre. copier	
+5771732	SA - Paiement refusé et panier se vide	
+5772276	SA - PDP to PDP	
+5772304	SA - PDP to PDP et AB 260231 ref	
+5772312	SA - PDP to PDP AB 260231 v1	
+5772316	SA - PDP to PDP et AB 260231 v2	
+5792628	LCP Good sur la PDP (Landing Page)	
+5792632	LCP Need Improvement sur la PDP (Landing Page)	
+5792636	LCP Poor sur la PDP (Landing Page)	
+5801776	SA - Ajout panier puis a vu "produit ajouté à votre panier"	
+5801780	SA - Ajout panier puis n'a pas vu "produit ajouté à votre panier" 	
+5801880	SA - A vu "Cannot read properties of undefined"	
+5802464	SA - Mauvais LCP (>=4s) sur toaster Connexion	
+5802472	SA - Bon LCP (<2,5s) sur toaster connexion	
+5802476	SA - LCP moyen (entre 2,5s et 4s) sur toaster connexion	
+5802512	SA - Sessions avec erreur JS à l'étape Connexion	
+5802516	SA - Sessions avec erreur API à l'étape toaster connexion	
+5802532	SA - N'a pas connu une erreur JS à l'étape Connexion	
+5802536	SA - N'a pas connu une erreur API à l'étape Connexion	
+5802848	SA - Sessions avec erreur JS à l'étape Création	
+5802860	SA - Sessions avec erreur API à l'étape Création	
+5802864	SA - a pas connu d'erreur API à l'étape Création	
+5802868	SA - N'a pas connu une erreur JS à l'étape Création	
+5804556	SA - a vu le message "Vous avez accédé à un lien qui a expiré"	
+5811772	KT- Erreur API Easyence 10659065883714460060	
+5811856	SA - A vu erreur API 12404095021897935279	
+5811860	SA - A vu msg "code de sécurité"	
+5811864	SA - n'a pas vu msg "code de sécurité" 	
+5817816	SA - AB test 273242 Originale	
+5817820	SA - AB test 273242 V1	
+5817876	SA - AB test 273242 Originale + clic menu	
+5817880	SA - AB test 273242 V1 + clic sur menu	
+5818012	SA - AB test 268480 Originale	
+5818016	SA - AB test 268480 variante	
+5818552	SA - "code de sécurité" et ne convertie pas	
+5818556	SA - "code de sécurité" et convertie	
+5826560	SA - AB 268480 v1 + clic sur search	
+5826564	SA - AB 268480 originale + clic sur search	
+5826716	Kt  - saisissez votre mot de passe pour vous connecterr	
+5828720	SA - Clic multiples carte cadeau	
+5828740	SA - Clic zone ouverte carte cadeau	
+5833308	KT ont vu le toaster création de compte et n'ont pas confirmé	
+5833312	KT ont vu le toaster création de compte et ont confirmé	
+5833500	KT ont vu le toaster connexion de compte et n'ont pas confirmé copier	
+5833504	KT ont vu le toaster connexion de compte et ont confirmé 	
+5833536	KT ont vu MDP et n'ont pas confirmé	
+5833540	KT ont vu MDP et ont vu confirmé 	
+5833684	KT - ceux qui ont vu le toaster de connexion	
+5833688	KT - ceux qui ont vu le toaster de création	
+5838324	SA - A vu "Mettre au panier"	
+5838332	SA - N'a pas vu "Mettre au panier" 	
+5840528	KT- KO ont vu le toaster connexion/ réinitialisatio/création de compte et n'ont pas confirmé 	
+5840544	KT- ont vu le toaster connexion/ réinitialisatio/création de compte et n'ont pas confirmé obj atteint	
+5847328	AP- Ajout panier PDP ayant utilisé le search	
+5847332	AP - Ajout panier depuis PLP ayat utilisé le search	
+5847340	AP - Ajout panier depuis page resultat ayant utilisé le search	
+5847812	SA - ANDROID A vu erreur API 12404095021897935279 	
+5847816	SA - IOS A vu erreur API 12404095021897935279 	
+5848072	KT - taux de clic NON sur mise à jour 	
+5848076	KT - taux de clic OUI sur mise à jour	
+5849396	KT - erreur JS clientlibs	
+5851600	SA - Complétion connexion	
+5851604	SA - Complétion création 	
+5852684	SA - AB test 274418 Reference 	
+5852688	SA - AB test 274418 Variante	
+5852824	SA - AB test 273377 Reference 	
+5852828	SA - AB test 273377 Variante 	
+5852860	SA - AB test 273838 Reference 	
+5852868	SA - AB test 273838 Variante 	
+5854020	KT - [message: L'action n'a pas pu être effectuée)	
+5861132	KT - recevoir une alerte stock	
+5861652	SA - Zone de clic valider ma commande	
+5861736	SA - Non sujet à internal server error étape paiement	
+5861808	SA - Sujet à internal server error étape paiement	
+5866732	KT - [paiement] pas vu: Internal Error. Details are available in Magento log file. Report ID: webapi- copier	
+5866748	KT [paiement] Internal server error	
+5866844	KT Internal & API 14763519063449070068	
+5867240	KT - carte cadeaux un montant de 20€	
+5898032	LL - AB test 274418 Reference + clic bannière	
+5898048	LL - AB test 274418 Variante 	
+5906288	LL - AB test 281336 Variante	
+5906292	LL - AB test 281336 Référence	
+5906296	LL - AB test 281336 Référence + clic fil d'ariane	
+5906300	LL - AB test 281336 Variante + clic fil d'ariane	
+5909368	LL - AB test 281336 Référence + clic "..." fil d'ariane PDP	
+5909372	LL - AB test 281336 Variante + clic "..." fil d'ariane PDP	
+5909384	LL - AB test 281336 Référence + clic "..." fil d'ariane PLP	
+5909396	LL - AB test 281336 Variante + clic "..." fil d'ariane PLP	
+5909404	LL - AB test 281336 Variante PDP	
+5909408	LL - AB test 281336 Référence PLP	
+5909468	LL - AB test 281336 Référence PDP	
+5909480	LL - AB test 281336 Variante PLP	
+5911288	LL - AB test 277323 Originale	
+5911300	LL - AB test 277323 V1 Gift card last	
+5911304	LL - AB test 277323 V2 Gift cards second	
+5915096	LL - AB test 286713 Variante Gift card last	
+5915100	LL - AB test 286713 Variante Gift card second	
+5916052	KT - PDP avec un Vendeur Cultura (En stock en ligne) et à "Ajouter au panier" 	
+5916056	KT - PDP avec un Vendeur Cultura (dispo sous) et à "Ajouter au panier" 	
+5916824	LL - AB test 276999 Variante	
+5916828	LL - AB test 276999 Originale	
+5918972	KT - Produit non diponible dans le panier	
+5925060	KT - étapes vers la page "Ajout panier" & abandon	
+5929128	LL - AB test 272861 Variante	
+5929136	LL - AB test 272861 Référence	
+5937056	LL - AB test 280788 V1 Before	
+5937060	LL - AB test 280788 V2 After	
+5937064	LL - AB test 280788 Original	
+5938452	KT - Message 'Désolé, il est impossible d'ajouter ce produit dans votre panier" et n'ont pas réalisé l'ajout panier	
+5938456	KT - N'ont pas vuMessage 'Désolé, il est impossible d'ajouter ce produit dans votre panier" et ont réalisé l'ajout panier copier	
+5939056	KT - carte 0€	
+5950104	LL - AB test 284956 Variante	
+5950116	LL - AB test 284956 Référence	
+5953880	LL - AB test  287432 Variante 1 gift card last	
+5953884	LL - AB test 287432 Référence 	
+5953892	LL - AB test 287432 Variante 2 giftcardsecond	
+5963560	LL - Clic Menu Burger desktop	
+5965340	KT - Commandes avec un produit au moins mis de côté	
+5968212	KT - paiement refusé	
+5972716	LL - AB test 285209 Variante	
+5972720	LL - AB test 285209 Référence	
+5976960	LL - Clic Zone de toaster cross format ebook/livre	
+5979332	LL - Sessions ayant vu pages livres + ebooks	
+5980892	LL - AB test  [Search] Bannières No Result 293150 Variante créatif	
+5980896	LL - AB test  [Search] Bannières No Result 293150 Variante musique	
+5980900	LL - AB test 293054 Référence 	
+5980904	LL - AB test 293054 Variante 	
+5980908	LL - AB test 287432 Référence	
+5980912	LL - AB test 287432 Variante cardslast	
+5980916	LL - AB test 287432 Variante cardslsecond	
+5980920	LL - AB test 290217 Référence	
+5980924	LL - AB test 290217 Variante 	
+5980928	LL - AB test 290991 Variante 	
+5980932	LL - AB test 290991 Référence 	
+5980936	LL - AB test 289410 Référence 	
+5980940	LL - AB test 289410 Variante  	
+5980944	LL - AB test 290273 Variante  	
+5980948	LL - AB test 290273 Référence 	
+5980952	LL - AB test 290290 Référence 	
+5980956	LL - AB test 290290 Variante  	
+5980964	LL - AB test 290285 Variante  	
+5980968	LL - AB test 290285 Référence 	
+5980972	LL - AB test 290287 Référence 	
+5980976	LL - AB test 290287 Variante  	
+5980980	LL - AB test 275242 Variante  	
+5980984	LL - AB test 275242 Référence 	
+5980988	LL - AB test 280086 Référence 	
+5980992	LL - AB test 280086 Variante  	
+5980996	LL - AB test 285209 Variante  	
+5981004	LL - AB test 285209 Référence  	
+5981008	LL - AB test 278504 Contenu IA Dattago 	
+5981012	LL - AB test 278504 Texte Cultura	
+5981016	LL - AB test 291543 Variante  	
+5981024	LL - AB test 291543 Référence 	
+5981036	LL - AB test 277741 Variante  	
+5981040	LL - AB test 277741 Référence 	
+5981168	Sequential: steps to page "https://www.cultura.com/order/confirmation"	
+5982676	Visiteur - vue page licence	
+5987252	LL - Utilisateur withkamino	
+5987256	LL - Utilisateur withoutkamino	
+5995320	LL - AB test 295396 Variante 	
+5995328	LL - AB test 295396 Référence	
+5995332	LL - AB test 296606 Variante	
+5995336	LL - AB test 296606 Référence 	
+5995340	LL - AB test 295053 Variante	
+5995344	LL - AB test 295053 Référence 	
+5995356	LL - AB test 280194 Variante SIMPLE	
+5995360	LL - AB test 280194 Variante Sans TAG	
+5995364	LL - AB test 280194 Référence 	
+5995380	LL - AB test 289410 Variante 	
+5995388	LL - AB test 289410  Référence 	
+5998300	KT - ont vu plusieurs fosi code de sécurité	
+6015896	Zone de clic CVR	
+6019392	ban pdp paques	
+6019692	KT - ajout e-résa KO	
+6022364	Zone de clic one-popin__inner	
+6022368	LL - AB 290217 clic popin reco post ajout panier	
+6026700	LL - exemple regex nomenclature EANs produits	
+6032088	LL - AB test 270884 Variante adresse cachée	
+6032092	LL - AB test 270884 Variante nom du vendeur	
+6032096	LL - AB test 270884 Référence 	
+6032404	AB a cliqué sur la Zone de clic kmino-ad depuis la SEARCH	
+6039544	LL - AB test 295447 Variante	
+6039552	LL - AB test 295447 Référence 	
+6039740	LL - Survol Desktop Zone kmino-ad - Search results	
+6039748	LL - Survol Desktop Zone kmino-ad - PLP	
+6039840	LL - Clic Desktop Zone kmino-ad - PLP	
+6040080	LL - regex PLP AB test Kamino 1/5	
+6040156	LL - regex PLP AB test Kamino 3/5  	
+6040216	LL - regex PLP AB test Kamino 4/5  	
+6040220	LL - regex PLP AB test Kamino 5/5  	
+6040228	LL - regex PLP AB test Kamino 2/5 	
+6040232	LL - regex PLP AB test Kamino 5 segments combinés	
+6040948	KT - erreur API 12404095021897935251  https://www.cultura.com/api/user Post 403	
+6041372	LL - AB test 295378 Variante 	
+6041376	LL - AB test 295378 Référence 	
+6041380	LL - AB test 281336 Variante popin	
+6041384	LL - AB test 287189 Variante tabs	
+6041420	LL - AB test 287189 Variante popin	
+6042624	KT -  Erreur API ID du groupe d'erreurs: 9997268249483024584 URL de la requête: https://www.cultura.com/magento/graphql  Méthode:   GET  Code d'état:   200	
+6042632	KT - Erreur API ID du groupe d'erreurs: 10260617946732226760 URL de la requête: https://www.cultura.com/magento/graphql  Méthode:   POST  Code d'état:   200	
+6042636	KT - Erreur API ID du groupe d'erreurs: 11240446904622901651 URL de la requête: https://www.cultura.com/magento/graphql  Méthode:   POST  Code d'état:   403	
+6042640	KT - Erreur API ID du groupe d'erreurs: 11240446904622848403 URL de la requête: https://www.cultura.com/magento/graphql  Méthode:   GET  Code d'état:   403	
+6042840	KT - Erreur API 16257682168719612308  https://www.cultura.com/api/login/CS_ANONYMIZED_EMAIL 404 GET	
+6042924	KT - on vu le toaster de connexion ou de création de compte mais n'ont pas eu de confirmation	
+6042964	KT - sans validation de connexion ou de création	
+6042972	KT - sans confirmation de création ou de connexion	
+6043088	KT - erreur mirakl  ID: 5307163729147730324 https://www.cultura.com/bin/mirakl/offers 404 GET	
+6043100	KT -  ID: 15370734893309159827 https://connect.cultura.com/api/v1/authn/factors/emfarz94pztTBZGvw417/verify 403 POST	
+6043200	KT - vu code de sécurité	
+6046484	KT - erreur JS 17312837609459863205	
+6047084	LL - AB 275242 - Séquence : étapes vers la page "Cart"	
+6048500	LL - a connu une erreur adyen sur la page paiement	
+6048912	FVI - ACCES MR [GLOBAL]	
+6056436	Voir la page “pages vive les couleurs”	
+6056440	Voir la page “apprentissage_couleurs”	
+6058152	LL - AB test 304994 Patch	
+6058192	LL - AB test 301315 Variante TOP	
+6058196	LL - AB test 301315 Variante BOTTOM	
+6058200	LL - AB test 301315  Référence 	
+6058204	LL - AB test 302467 Variante	
+6058208	LL - AB test 302467 Référence	
+6058216	LL - AB test 302387 Variante	
+6058220	LL - AB test 302387 Référence	
+6058244	LL - AB test 305381 Variante	
+6058256	LL - AB test 305381  Référence	
+6058296	KT - home > search > Ajout panier 	
+6079120	FVI - ce mot de passe a déjà été utilisé	
+6079128	FVI - Erreur Payment 10659065883714460060	
+6079292	FVI - code vérification incorrect Login 	
+6081472	FVI - identification échouée	
+6081496	FVI - Erreur API Anonymisation E-mail	
+6081568	FVI - Error JS Loading Chunk	
+6081864	FVI - CTA KO code vérification login	
+6081872	FVI - erreur mot de passe	
+6081888	FVI - boucle étape login - [login]	
+6083424	FVI - sessions sans erreurs API et JS [Global]	
+6083660	FVI - 12404095021897935251 boucle étape connexion [tunnel]	
+6083668	FVI - 12404095021897935251 boucle étape connexion [hors tunnel] 	
+6083740	FVI - 15370734893309159825 + 827 - code vérification [tunnel]	
+6083756	FVI - 15370734893309159825 + 827 - code vérification [hors tunnel]	
+6084432	FVI - 14380663481714862481 erreur mot de passe [tunnel] 	
+6084440	FVI - 14380663481714862481 erreur mot de passe [hors tunnel]	
+6084492	FVI - 16257682168719612307 anonymisation mail [tunnel] 	
+6084496	FVI - 16257682168719612307 anonymisation mail [hors tunnel] 	
+6084596	FVI - sessions sans erreurs API et JS [Global >2 pages vues )	
+6090304	LL - 305013 Patch carte bleue	
+6090776	FVI - Paiement TDV ne se charge pas	
+6090852	KT - ont vu au moins trois fois la page de livraison	
+6090976	FVI - une erreur est survenue - login	
+6091004	FVI - une erreur est survenue - checkout delivery	
+6091032	KT - erreur js 355293248930453224 vu 3 fois la livraison	
+6092252	KT - suivi du mauvais CLS fin de TDV	
+6093132	FVI - 11655486721126426824 - Graphql Payment	
+6093492	FVI - 16420535499014465936 paiement refusé	
+6093560	FVI - 14763519063449070068 Internal Error ID : webapi-68129a06094ba	
+6093600	FVI - 14236355464206151056 paiement refusé + chargement long	
+6094136	FVI - 14763519063449069972 - Current Customer does not have an active cart	
+6094312	FVI - la page est en cours de chargement	
+6095128	FVI - 16046119566140501423 connexion + déco forcée après clic [tunnel]	
+6095140	FVI - 16046119566140501423 connexion + déco forcée après clice [hors tunnel]	
+6095248	FVI - transaction refusée	
+6103268	LL - AB test 308767 Variante ONEY	
+6103308	LL - AB test 278186 Variante  CTA sticky	
+6106484	FVI - AB test 308514 Référence	
+6106488	FVI - AB test 308514 Variante	
+6107820	CS Audit - Search DIR THEN PDP	
+6112132	KT - erreur API  11240446904622901651 paiement	
+6112144	KT - erreur API  14763519063449070068 paiement	
+6112148	KT - erreur API  11655486721126426824 paiement 	
+6112164	KT - 6081568 "Loading Chunk Failed"	
+6112948	FVI - 245113836839508168 l'action n'a pas pu être effectuée 	
+6113308	FVI - Tunnel répétition 	
+6113620	FVI - AB 311854 V1 	
+6113624	FVI - AB 311854 Référence	
+6113668	FVI - 11240446904622901651  Graphql 403 	
+6121676	FVI - AB test 292750 Variante	
+6121680	FVI - AB test 292750 Référence	
+6123504	FVI - [care] mise en avant programme de fidelité dans pop in compte	
+6123548	[CARE] Faciliter l'utilisation des points dans le TDV	
+6123572	KT- bots qui ont ajouté au panier	
+6123908	FVI - Validation paiement Oney	
+6125704	FVI - 302467 "plus d'informations"	
+6128672	FVI - Internal Error [global]	
+6128724	FVI - Internal Error. Details are available in Magento log file	
+6128916	FVI - Details are available in Magento log	
+6129656	FVI - AB 316374 PRICE	
+6129660	FVI - AB 316374 DELIVERY	
+6129668	FVI - AB 316374 REFERENCE	
+6129832	FVI - 316261 variante	
+6133696	FVI - Popin Panier [site] jauge livraison minicart	
+6134688	FVI - Vue panier	
+6135244	FVI - AB test 306069​ variante	
+6135248	FVI - AB test 306069​ référence	
+6137092	FVI - AB test 315492 Variante	
+6137100	FVI - AB test 315492 Référence	
+6137228	FVI - AB test 317486 Variante	
+6137240	FVI - AB test 317486 Référence	
+6141416	FVI - client ayant vu toaster connexion	
+6142080	secs test	
+6142156	FVI - AB TEST 304052 variante	
+6142160	FVI - AB TEST 304052 référence	
+6145756	FVI - AB test 318116 Variante	
+6148520	FVI - AB 319018 variante OCCASION	
+6148524	FVI - AB 319018 référence	
+6148540	FVI - AB 318656 variante	
+6149120	FVI - Failed to Fetch	
+6150676	FVI - commandes Cultura	
+6150680	FVI - commandes Cultura+MKP 	
+6150684	FVI - commandes MKP (1 vendeur)	
+6150704	FVI - commandes MKP Multivendeurs	
+6150904	FVI - Etape unique panier	
+6150912	FVI - Etape multiples panier	
+6153916	FVI - AB 308514 panier sup 60€	
+6157080	Séquence : étapes vers la page "Checkout - delivery"	
+6158460	FVI - multiples vues PDP	
+6161316	FVI - AB test 308514 Référence sans 308767	
+6163888	FVI - Multiples visions payment	
+6164288	FVI - iOS Safari 	
+6164292	FVI - iOS Autres moteur	
+6164368	MD - SEARCH INDISPO EN LIGNE	
+6164412	MD - SEARCH DISPO EN LIGNE	
+6168948	FVI - iOS Chrome	
+6168972	FVI - iOS Chrome 138	
+6168976	FVI - iOS Chrome 137	
+6168980	FVI - iOS Chrome 136	
+6169304	FVI - votre adresse semble contenir une erreur	
+6171504	KT - API [15331167337669270004] adresse de livraison	
+6171920	KT - api [530716372 9147730324] https://www.cultura.com/bin/mirakl/offers	
+6171996	KT -erreur API 15986376469227104756	
+6197596	FVI - AB 316374 PRICE MKP	
+6197600	FVI - AB 316374 PRICE CULTURA&MKP	
+6197604	FVI - AB 316374 PRICE CULTURA	
+6197608	FVI - AB 316374 REFERENCE MKP	
+6197612	FVI - AB 316374 REFERENCE MKP&CULTURA	
+6197616	FVI - AB 316374 REFERENCE CULTURA	
+6198088	FVI - BOTS	
+6198632	[Kameleoon2.0] [TDV] Livraison nouvelle UI - newUI	
+6205900	FVI - Erreur GraphQL Compilation	
+6208512	FVI - PDP Occasion	
+6208840	FVI - Liste Scolaire	
+6209104	AB - 316261 NO	
+6209112	AB - 316261 REFERENCE	
+6211280	KT - erreur https://www.cultura.com/magento/graphql	
+6212184	FVI - AB 249558 VARIANTE PRODUIT	
+6212188	FVI - AB 249558 VARIANTE BOUTON	
+6212192	FVI - AB 249558 REFERENCE	
+6212276	FVI - Erreur API [GraphQL exclu]	
+6212308	FVI - https://connect.cultura.com/api/v1/authn	
+6212344	FVI - https://www.cultura.com/api/login/CS_ANONYMIZED_EMAIL	
+6214528	FVI - AB FAQ dans Auto-Complete	
+6214576	FVI - VARIANTE Validation paiement Oney + Confirmation commande	
+6214580	FVI - REFERENCE Validation paiement Oney + Confirmation commande	
+6214856	FVI - AB 318116​	
+6221440	FVI - AB 319018 variante ERESA	
+6222556	FVI - AB 319018 variante 	
+6222560	FVI - AB 319018 référence OCCASION	
+6224216	FVI - iOS + Payment + confirmation	
+6224220	FVI - iOS + Payment SANS confirmation	
+6224268	FVI - doublon page paiement 	
+6224388	FVI - Paiement puis sortie	
+6225004	FVI - iOS clic CB	
+6225008	FVI - iOS clic carte kdo	
+6225048	FVI - iOS clic Paypal 	
+6225052	FVI - iOS clic Apple Play	
+6225060	FVI - iOS clic Oney	
+6226996	FVI - sessions -5s	
+6227192	FVi - AB 321824 variante	
+6227196	FVi - AB 321824 référence	
+6227792	FVI - MKP SURDISCOUNT	
+6227808	FVI - PDP MKP	
+6233984	FVI - AJOUT PLP+SEARCH SANS PDP	
+6234304	FVI - AB 319886 Référence	
+6234308	FVI - AB 319886 Variante	
+6237324	FVI - iOS26	
+6238824	FVI - AB 334233 référence	
+6238836	FVI - AB 334233 variante price	
+6238848	FVI - AB 334233 variante delivery	
+6238904	FVI - AB 332642 référence	
+6238908	FVI - AB 332642 Variante	
+6241372	FVI - AB 322353 Variante	
+6241376	FVI - AB 322353 Référence Fictive	
+6243840	FVI - AB 322353 Variante APPRENTISSAGE	
+6243844	FVI - AB 322353 Référence Fictive APPRENTISSAGE	
+6243896	THE ADDRESS FAILED TO SAVE	
+6244844	FVI - PERSO PUZZLE	
+6251844	FVI - Invalid City	
+6253632	FVI - Combo erreur GraphQL + MiraklOffers	
+6260560	FVI - erreur API 245113836839508168 	
+6260604	FVI - Panier vendeur unique / 7-13pdts	
+6260608	FVI - Panier vendeur unique / 1-6pdts 	
+6260624	FVI - Panier vendeur unique / 14-25pdts	
+6277868	FVI - erreur 14236355464206151056 + carte cadeau	
+6279420	FVI - Invalid City New	
+6279424	FVI - Invalid City Old	
+6279676	FVI - PDP + coup de coeur 	
+6279680	FVI - PDP sans coup de coeur	
+6288244	KT- AB 1195757  VARIANTE orderByDate (343120)	
+6288248	KT- AB 1195757  VARIANTE orderByPrice (343120) 	
+6288252	KT- AB REFERENCE (343120)  	
+6289568	FVI - Accès panier	
+6289572	FVI - accès livraison	
+6289588	FVI - accès paiement	
+6289592	FVI - accès confirmation paiement	
+6291056	FVI - AB 338251 Référence	
+6291064	FVi - AB 338251 Variante	
+6291520	kt - erreur js 17312837609459863205	
+6293952	kt - erreur JS 17312837609459863205	
+6294712	kt - erreur API 5nov 17122863893545490835	
+6294720	KT - erreur API 5nov 11240446904622848403	
+6294860	FVI - Erreur API 06/11	
+6295272	Network Failed to Fetch	
+6298712	FVI - AB 295053 référence	
+6298716	FVI - AB 295053 variante	
+6299052	FVI - AB 338349 Référence	
+6299056	FVI - AB 338349 Variante	
+6306224	KT - PDP ebook	
+6320748	FVI - carte cadeau l'action n'a pas pu être effectuée 	
+6324356	FVI - AB 347783 Variante	
+6324360	FVI - AB 343825 Variante	
+6324364	FVI - AB 343825 Référence	
+6328060	[MD] - Cricut	
+6328092	[MD] - Legami	
+6335756	FVI - Boucle paiement - Panier 	
+6337284	FVI - consulter soldes carte cadeau	
+6337808	FVI - AB 343120 Boucle livraison panier	
+6337812	FVI - AB 343120 Boucle livraison panier copier	
+6337840	FVI - LIVRAISON BOUCLE PANIER GLOBAL	
+6337852	FVI - AB LIVRAISON BOUCLE PANIER V2 copier	
+6337940	FVI - AB 346590 Variante Miniature	
+6337944	FVI - AB 346590 Variante Number	
+6337948	FVI - AB 346590 Référence	
+6337952	FVI - AB 350435 Référence	
+6337956	FVI - AB 350435 Variante	
+6337968	FVI - AB 349579 Variante date OLD	
+6337972	FVI - AB 349579 Variante date NEW	
+6339792	FVI - LIVRAISON BOUCLE PANIER GLOBAL VUE PAYMENT	
+6339800	FVI - LIVRAISON BOUCLE PANIER GLOBAL SANS VUE PAYMENT 	
+6339824	FVI - LIVRAISON BOUCLE PANIER GLOBAL SANS VUE PAYMENT - CULTURA + MKP	
+6339828	FVI - LIVRAISON BOUCLE PANIER GLOBAL SANS VUE PAYMENT - CULTURA 	
+6339832	FVI - LIVRAISON BOUCLE PANIER GLOBAL SANS VUE PAYMENT - MKP	
+6339908	FVI - Merci de renseigner votre adresse - News users	
+6339912	FVI - Merci de renseigner votre adresse - Old users 	
+6340520	FVI - Merci de renseigner votre adresse - Old users  NON EXPOSE	
+6340524	FVI - Merci de renseigner votre adresse - News users NON EXPOSE	
+6342184	KT- AB PRICE (343120)  1P	
+6342192	KT- AB PRICE (343120) 1P+3P	
+6342196	KT- AB PRICE (343120) 3P	
+6343052	FVI - 1P+3P / 3P multi vendeurs	
+6343056	FVI - 1P ou 3P 1 vendeur	
+6345004	FVI - AB 349283 Référence	
+6345008	FVI - AB 349283 Variante	
+6356724	FVI - Accès CARE	
+6359392	FVI - une erreur s'est produite	
+6359408	FVI - je ne trouve pas mon adresse	
+6361488	FVI - AB 347404 Référence	
+6361492	FVI - AB 347404 Before	
+6361496	FVI - AB 347404 After	
+6363400	FVI - AB 347404 Référence 3P	
+6363404	FVI - AB 347404 Référence 1P+3P	
+6363408	FVI - AB 347404 Before 3P	
+6363412	FVI - AB 347404 Before 1P+3P	
+6363416	FVI - AB 347404 After 3P	
+6363420	FVI - AB 347404 After 1P+3P	
+6366852	FVI - Carrousel Inspi FDA Références	
+6366972	FVI - Carrousel Inspi FDA Variantes	
+6368736	FVI - Wishlist OutSotck	
+6372120	%fieldname =%fieldvalue	
+6373152	FVI - AB 343825 Variante No Result	
+6373156	FVI - AB 343825 Référence No Result copier	
+6373404	FVI - le montant payé ne correspond pas	
+6378496	FVI - AB 354265 + 357920 Référence	
+6378500	FVI - AB 354265 + 357920 Variante 	
+6379328	PDP Puzzles Patch	
+6379380	FVI - 345205	
+6383684	FVI - AB 358041 Référence	
+6383688	FVI - AB 358041 ByDate	
+6383692	FVI - AB 358041 ByPrice	
+6383700	FVI - AB 351565	
+6383704	FVI - AB 351565 2	
+6383708	FVI - AB 351565 3	
+6383712	FVI - AB 351565 4	
+6383716	FVI - AB 351565 5	
+6391176	FVI - AB 359568 Référence	
+6391180	FVI - AB 359568 lightboxOnly	
+6391184	FVI - AB 359568 lightboxDescription	
+6391188	FVI - AB 358041 référence	
+6391192	FVI - AB 358041 orderbyDate	
+6391196	FVI - AB 358041 orderbyPrice	
+6391200	FVI - AB 351565 A1B1	
+6391204	FVI - AB 351565 A1B2	
+6391208	FVI - AB 351565 A2B1	
+6391212	FVI - AB 351565 A2B2	
+6391224	FVI - AB 357563 référence	
+6391228	FVI - AB 357563 variante	
+6396032	erruer JS 16651275395276904303	
+6396168	Trouvez les produits près de chez vous	
+6400104	FVI - AB 349283 Variante -40€ PM	
+6400108	FVI - AB 349283 Variante +40€ PM	
+6400116	FVI - AB 349283 Référence -40€ PM	
+6400120	FVI - AB 349283 Référence +40€ PM 	
+6422644	FVI - AB 358041 Référence  Complétion 	
+6422648	FVI - AB 358041 ByPrice Complétion	
+6422652	FVI - AB 358041 ByDate Complétion 	
+6426560	FVI - AB 361179 Référence	
+6426564	FVI - AB 361179 Variante	
+6426568	FVI - AB 366915 Variante	
+6426576	FVI - AB 369174 Réference	
+6426580	FVI - AB 369174 AfficherTout	
+6426584	FVI - AB 369174 voirPlus	
