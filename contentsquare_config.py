@@ -11,11 +11,10 @@ SEGMENT_IDS_TO_ANALYZE = [6383684, 6383688, 6383692]
 # Whether to show metrics split by desktop/mobile/tablet.
 ANALYZE_BY_DEVICE = True
 
-# Analysis window in days (capped to 92 by script logic).
-DAYS_TO_ANALYZE = 30
-
-# Number of most recent days to exclude (data freshness delay).
-DAYS_OFFSET = 1
+# Analysis period (UTC), inclusive.
+# Expected format: "YYYY-MM-DD"
+START_DATE = "2026-02-01"
+END_DATE = "2026-03-01"
 
 ####### PAGE GROUP METRICS PARAMS
 

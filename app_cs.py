@@ -8,7 +8,7 @@ import os
 import json
 import requests
 from dotenv import load_dotenv
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timezone
 from pathlib import Path
 from requests.adapters import HTTPAdapter
 from requests.exceptions import RequestException, SSLError, Timeout
@@ -37,6 +37,14 @@ try:
     from contentsquare_config import SEGMENT_IDS_TO_ANALYZE as CONFIG_SEGMENT_IDS_TO_ANALYZE
 except Exception:
     CONFIG_SEGMENT_IDS_TO_ANALYZE = []
+try:
+    from contentsquare_config import START_DATE as CONFIG_START_DATE
+except Exception:
+    CONFIG_START_DATE = None
+try:
+    from contentsquare_config import END_DATE as CONFIG_END_DATE
+except Exception:
+    CONFIG_END_DATE = None
 
 # Charger les identifiants
 load_dotenv()
@@ -46,7 +54,8 @@ PROJECT_ID = os.getenv("CS_PROJECT_ID")
 
 SEGMENT_IDS_TO_ANALYZE = []
 ANALYZE_BY_DEVICE = True
-DAYS_TO_ANALYZE = 30
+START_DATE = CONFIG_START_DATE
+END_DATE = CONFIG_END_DATE
 GOAL_ID = None
 EXPORT_DIR = "exports"
 KPI_EXCEL_FILENAME = "contentsquare_kpis.xlsx"
@@ -95,6 +104,18 @@ def resolve_goal_ids(value):
 
 def resolve_segment_ids(value):
     return resolve_goal_ids(value)
+
+
+def parse_config_date(value, field_name):
+    if value is None:
+        raise ValueError(f"{field_name} est manquant. Définis-le dans contentsquare_config.py.")
+    value_str = str(value).strip()
+    try:
+        return datetime.strptime(value_str, "%Y-%m-%d")
+    except ValueError as exc:
+        raise ValueError(
+            f"{field_name} invalide ({value_str}). Format attendu: YYYY-MM-DD."
+        ) from exc
 
 
 PAGE_GROUP_MAPPING_ID = resolve_mapping_id(CONFIG_PAGE_GROUP_MAPPING_ID)
@@ -775,7 +796,7 @@ def main():
     print("🔧 Configuration:")
     print(f"   Segments: {SEGMENT_IDS_TO_ANALYZE}")
     print(f"   By device: {ANALYZE_BY_DEVICE}")
-    print(f"   Période: {DAYS_TO_ANALYZE} jours")
+    print(f"   Période: {START_DATE} -> {END_DATE}")
     print(f"   Goal ID: {GOAL_ID}")
     print(f"   Goal IDs (group KPI only): {GOAL_IDS}")
     print(f"   Page-group ID (KPI scope): {PAGE_GROUP_ID}")
@@ -794,13 +815,24 @@ def main():
         return
 
     # 2. Dates
-    days = min(DAYS_TO_ANALYZE, 92)
-    end_date = datetime.now(timezone.utc).replace(hour=23, minute=59, second=59)
-    start_date = end_date - timedelta(days=days)
-    start_date = start_date.replace(hour=0, minute=0, second=0)
+    try:
+        start_date = parse_config_date(START_DATE, "START_DATE").replace(
+            hour=0, minute=0, second=0, microsecond=0, tzinfo=timezone.utc
+        )
+        end_date = parse_config_date(END_DATE, "END_DATE").replace(
+            hour=23, minute=59, second=59, microsecond=999000, tzinfo=timezone.utc
+        )
+    except ValueError as e:
+        print(f"❌ Erreur configuration dates: {e}")
+        return
+
+    if start_date > end_date:
+        print("❌ Erreur configuration dates: START_DATE doit être antérieure ou égale à END_DATE.")
+        return
+
     start_date_iso = start_date.strftime("%Y-%m-%dT%H:%M:%S.000Z")
     end_date_iso = end_date.strftime("%Y-%m-%dT%H:%M:%S.999Z")
-    print(f"📅 Période: {start_date.strftime('%d/%m/%Y')} - {end_date.strftime('%d/%m/%Y')} ({days} jours)\n")
+    print(f"📅 Période: {start_date.strftime('%d/%m/%Y')} - {end_date.strftime('%d/%m/%Y')}\n")
 
     # 3. Segments
     try:
@@ -1006,7 +1038,7 @@ def main():
     print("="*70)
     print()
     print("💡 Pour analyser des segments spécifiques, copie les IDs ci-dessus et ajoute-les dans SEGMENT_IDS_TO_ANALYZE")
-    print(f"📅 Période: {start_date.strftime('%d/%m/%Y')} - {end_date.strftime('%d/%m/%Y')} ({days} jours)\n")
+    print(f"📅 Période: {start_date.strftime('%d/%m/%Y')} - {end_date.strftime('%d/%m/%Y')}\n")
 
 
 if __name__ == "__main__":
