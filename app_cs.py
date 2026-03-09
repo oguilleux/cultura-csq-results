@@ -15,7 +15,8 @@ from requests.exceptions import RequestException, SSLError, Timeout
 from urllib3.util.retry import Retry
 try:
     from openpyxl import Workbook
-    from openpyxl.styles import PatternFill
+    from openpyxl.styles import PatternFill, numbers
+    from openpyxl.utils import get_column_letter
 except ModuleNotFoundError as exc:
     raise SystemExit(
         "Missing dependency: openpyxl. Install it with: python3 -m pip install openpyxl"
@@ -649,6 +650,12 @@ def segment_value_column_name(segment_id):
     return f"metric_value_segment_{segment_id}"
 
 
+def segment_delta_column_name(segment_id):
+    if segment_id is None:
+        return "delta_vs_ref_all"
+    return f"delta_vs_ref_segment_{segment_id}"
+
+
 def normalize_segment_order(segment_ids, rows):
     ordered = []
     for segment_id in segment_ids or []:
@@ -698,6 +705,11 @@ def apply_reference_coloring_on_pivot(ws, reference_segment_id):
         for name, idx in headers.items()
         if name.startswith("metric_value_segment_") and idx != reference_column
     ]
+    delta_columns = [
+        idx
+        for name, idx in headers.items()
+        if name.startswith("delta_vs_ref_")
+    ]
     if not compare_columns:
         return
 
@@ -712,18 +724,116 @@ def apply_reference_coloring_on_pivot(ws, reference_segment_id):
         metric_name = ws.cell(row=row_idx, column=metric_name_column).value if metric_name_column else None
         reverse_coloring = metric_name == "bounceRate"
 
-        for col_idx in compare_columns:
+        for col_idx in compare_columns + delta_columns:
             value_cell = ws.cell(row=row_idx, column=col_idx)
             value = value_cell.value
             if not is_numeric(value):
                 continue
 
-            if float(value) > float(ref_value):
+            # For delta columns, compare against 0; for value columns, compare against ref
+            if col_idx in delta_columns:
+                cmp_ref = 0
+            else:
+                cmp_ref = float(ref_value)
+
+            if float(value) > cmp_ref:
                 value_cell.fill = fill_red if reverse_coloring else fill_green
-            elif float(value) < float(ref_value):
+            elif float(value) < cmp_ref:
                 value_cell.fill = fill_green if reverse_coloring else fill_red
             else:
                 value_cell.fill = fill_yellow
+
+
+def build_segment_headers_with_deltas(segment_order, reference_segment_id):
+    headers = []
+    for seg_id in segment_order:
+        headers.append(segment_value_column_name(seg_id))
+        if reference_segment_id is not None and seg_id != reference_segment_id:
+            headers.append(segment_delta_column_name(seg_id))
+    return headers
+
+
+def build_segment_values_with_deltas(values, segment_order, reference_segment_id):
+    cells = []
+    for seg_id in segment_order:
+        raw = values.get(seg_id)
+        cells.append(normalize_excel_value(raw))
+        if reference_segment_id is not None and seg_id != reference_segment_id:
+            cells.append(None)  # placeholder, formula inserted later
+    return cells
+
+
+def insert_delta_formulas(ws, key_fields_count, segment_order, reference_segment_id):
+    if reference_segment_id is None or ws.max_row < 2:
+        return
+
+    # Build a map of segment_id -> (value_col_index, delta_col_index)
+    ref_col = None
+    delta_cols = {}  # segment_id -> (value_col_1based, delta_col_1based)
+    col = key_fields_count + 1  # 1-based
+    for seg_id in segment_order:
+        value_col = col
+        col += 1
+        if seg_id == reference_segment_id:
+            ref_col = value_col
+        else:
+            if reference_segment_id is not None:
+                delta_col = col
+                col += 1
+                delta_cols[seg_id] = (value_col, delta_col)
+
+    if ref_col is None:
+        return
+
+    ref_letter = get_column_letter(ref_col)
+    for seg_id, (val_col, delta_col) in delta_cols.items():
+        val_letter = get_column_letter(val_col)
+        for row_idx in range(2, ws.max_row + 1):
+            ws.cell(row=row_idx, column=delta_col).value = (
+                f"=({val_letter}{row_idx}-{ref_letter}{row_idx})/{ref_letter}{row_idx}"
+            )
+
+
+METRIC_NUMBER_FORMATS = {
+    "bounceRate":           '0.00"%"',
+    "cartAverage":          '#,##0.00 "€"',
+    "pageviewAverage":      "0.00",
+    "revenueSum":           '#,##0.00 "€"',
+    "sessionTimeAverage":   "0.00",
+    "conversionCount":      "#,##0",
+    "conversionRate":       '0.00"%"',
+    "visits":               "#,##0",
+}
+
+DELTA_NUMBER_FORMAT = "0.00%"
+
+
+def apply_number_formatting(ws):
+    if ws.max_row < 2:
+        return
+
+    headers = {cell.value: idx + 1 for idx, cell in enumerate(ws[1])}
+    metric_name_col = headers.get("metric_name")
+    if not metric_name_col:
+        return
+
+    value_columns = [
+        idx for name, idx in headers.items()
+        if name.startswith("metric_value_")
+    ]
+    delta_columns = [
+        idx for name, idx in headers.items()
+        if name.startswith("delta_vs_ref_")
+    ]
+
+    for row_idx in range(2, ws.max_row + 1):
+        metric_name = ws.cell(row=row_idx, column=metric_name_col).value
+        fmt = METRIC_NUMBER_FORMATS.get(metric_name)
+        if fmt:
+            for col_idx in value_columns:
+                ws.cell(row=row_idx, column=col_idx).number_format = fmt
+        for col_idx in delta_columns:
+            ws.cell(row=row_idx, column=col_idx).number_format = DELTA_NUMBER_FORMAT
 
 
 def export_kpis_excel(export_dir, filename, site_rows, group_rows, reference_segment_id=None, segment_ids=None):
@@ -733,7 +843,7 @@ def export_kpis_excel(export_dir, filename, site_rows, group_rows, reference_seg
 
     wb = Workbook()
     segment_order = normalize_segment_order(segment_ids, site_rows + group_rows)
-    segment_columns = [segment_value_column_name(seg_id) for seg_id in segment_order]
+    segment_columns = build_segment_headers_with_deltas(segment_order, reference_segment_id)
 
     ws_site = wb.active
     ws_site.title = "site_wide_kpis"
@@ -752,7 +862,7 @@ def export_kpis_excel(export_dir, filename, site_rows, group_rows, reference_seg
         values = item["values"]
         ws_site.append(
             [base.get(field) for field in site_key_fields]
-            + [normalize_excel_value(values.get(seg_id)) for seg_id in segment_order]
+            + build_segment_values_with_deltas(values, segment_order, reference_segment_id)
         )
     ws_site.freeze_panes = "A2"
 
@@ -778,9 +888,15 @@ def export_kpis_excel(export_dir, filename, site_rows, group_rows, reference_seg
         values = item["values"]
         ws_group.append(
             [base.get(field) for field in group_key_fields]
-            + [normalize_excel_value(values.get(seg_id)) for seg_id in segment_order]
+            + build_segment_values_with_deltas(values, segment_order, reference_segment_id)
         )
     ws_group.freeze_panes = "A2"
+
+    insert_delta_formulas(ws_site, len(site_key_fields), segment_order, reference_segment_id)
+    insert_delta_formulas(ws_group, len(group_key_fields), segment_order, reference_segment_id)
+
+    apply_number_formatting(ws_site)
+    apply_number_formatting(ws_group)
 
     apply_reference_coloring_on_pivot(ws_site, reference_segment_id)
     apply_reference_coloring_on_pivot(ws_group, reference_segment_id)
