@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(.venv/bin/python -m pip list)",
+      "Bash(.venv/bin/python -m pip install streamlit)",
+      "Bash(.venv/bin/python -m pip install --timeout 120 streamlit)",
+      "Bash(.venv/bin/python -m pip install flask)"
+    ]
+  }
+}
