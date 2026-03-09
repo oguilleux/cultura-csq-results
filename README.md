@@ -26,8 +26,8 @@ Puis ouvrir **http://localhost:3000** dans votre navigateur.
 ## Utilisation
 
 1. Remplir les champs (dates, segments, etc.) dans l'interface web
-2. Cliquer sur **Run** pour lancer l'export
-3. Une fois terminé, cliquer sur **Download** pour récupérer le fichier Excel
+2. Cliquer sur **Lancer** pour lancer l'export
+3. Une fois terminé, cliquer sur **Télécharger** pour récupérer le fichier Excel
 
 ## Configuration par défaut
 

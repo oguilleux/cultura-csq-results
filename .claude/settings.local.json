@@ -4,7 +4,8 @@
       "Bash(.venv/bin/python -m pip list)",
       "Bash(.venv/bin/python -m pip install streamlit)",
       "Bash(.venv/bin/python -m pip install --timeout 120 streamlit)",
-      "Bash(.venv/bin/python -m pip install flask)"
+      "Bash(.venv/bin/python -m pip install flask)",
+      "Bash(ls /Users/olivierguilleux/www/contentsquare-results/exports/*.json)"
     ]
   }
 }

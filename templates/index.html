@@ -4,6 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ContentSquare KPI Exporter</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tom-select@2.4.3/dist/css/tom-select.min.css">
+<script src="https://cdn.jsdelivr.net/npm/tom-select@2.4.3/dist/js/tom-select.complete.min.js"></script>
 <style>
   :root {
     --bg: #0f172a;
@@ -66,6 +68,10 @@
     color: var(--text);
     font-size: .9rem;
     transition: border-color .2s;
+    width: 100%;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   input:focus, select:focus {
     outline: none;
@@ -146,11 +152,44 @@
     display: inline-block;
   }
   @keyframes spin { to { transform: rotate(360deg); } }
+  .ts-wrapper { width: 100%; }
+  .ts-control {
+    background: var(--input-bg) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: 8px !important;
+    color: var(--text) !important;
+    padding: .4rem .6rem !important;
+    min-height: 38px !important;
+  }
+  .ts-control input { color: var(--text) !important; }
+  .ts-control .item {
+    background: var(--accent) !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 4px !important;
+    padding: .15rem .5rem !important;
+    font-size: .8rem !important;
+  }
+  .ts-control .item .remove { color: rgba(255,255,255,.7) !important; border-left-color: rgba(255,255,255,.2) !important; }
+  .ts-dropdown {
+    background: var(--card) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: 8px !important;
+    color: var(--text) !important;
+  }
+  .ts-dropdown .option { color: var(--text) !important; }
+  .ts-dropdown .option:hover, .ts-dropdown .active { background: var(--accent) !important; color: white !important; }
+  .ts-wrapper.focus .ts-control { border-color: var(--accent) !important; box-shadow: none !important; }
 </style>
 </head>
 <body>
 <div class="container">
-  <h1>ContentSquare KPI Exporter</h1>
+  <div style="display:flex;align-items:center;justify-content:space-between;">
+    <h1>ContentSquare KPI Exporter</h1>
+    <button type="button" id="refresh-options-btn"
+            style="font-size:.75rem;padding:.35rem .8rem;background:transparent;border:1px solid var(--border);color:var(--muted);border-radius:6px;cursor:pointer;white-space:nowrap;"
+            title="Recharger segments, goals, mappings et page groups depuis l'API">Rafraichir les listes</button>
+  </div>
   <p class="subtitle">Configure et lance l'export de tes KPIs en quelques clics.</p>
 
   <div id="config-form">
@@ -173,9 +212,8 @@
       <div class="form-grid">
         <div class="form-group full">
           <label for="segment_ids">IDs des segments (la 1ere = reference)</label>
-          <input type="text" id="segment_ids" value="{{ segment_ids }}"
-                 placeholder="ex: 6383684, 6383688, 6383692">
-          <span class="hint">Separes par des virgules. Laisser vide pour ignorer.</span>
+          <select id="segment_ids" multiple placeholder="Rechercher un segment..."></select>
+          <span class="hint">La premiere selection sert de reference. Laisser vide pour ignorer.</span>
         </div>
         <div class="form-group full">
           <div class="checkbox-row">
@@ -190,13 +228,16 @@
       <h2>Page Groups</h2>
       <div class="form-grid">
         <div class="form-group">
-          <label for="page_group_id">Page Group ID</label>
-          <input type="text" id="page_group_id" value="{{ page_group_id }}"
-                 placeholder="Optionnel">
+          <label for="mapping_id">Mapping ID</label>
+          <select id="mapping_id">
+            <option value="{{ mapping_id }}">Chargement...</option>
+          </select>
         </div>
         <div class="form-group">
-          <label for="mapping_id">Mapping ID</label>
-          <input type="text" id="mapping_id" value="{{ mapping_id }}">
+          <label for="page_group_id">Page Group ID</label>
+          <select id="page_group_id">
+            <option value="">Tous (aucun filtre)</option>
+          </select>
         </div>
       </div>
     </div>
@@ -205,9 +246,7 @@
       <h2>Goals</h2>
       <div class="form-group">
         <label for="goal_ids">Goal IDs</label>
-        <input type="text" id="goal_ids" value="{{ goal_ids }}"
-               placeholder="ex: 1816096">
-        <span class="hint">Separes par des virgules.</span>
+        <select id="goal_ids" multiple placeholder="Rechercher un goal..."></select>
       </div>
     </div>
 
@@ -223,8 +262,135 @@
   </div>
 </div>
 
+<script>
+var initialMappingId = "{{ mapping_id }}";
+var initialPageGroupId = "{{ page_group_id }}";
+var initialSegmentIds = [{{ segment_ids_json|safe }}];
+var initialGoalIds = [{{ goal_ids_json|safe }}];
+</script>
 {% raw %}
 <script>
+var mappingSelect = document.getElementById("mapping_id");
+var pageGroupSelect = document.getElementById("page_group_id");
+var allPageGroups = [];
+
+// Init Tom Select for segments (multi-select with search)
+var segmentsTomSelect = new TomSelect("#segment_ids", {
+  plugins: ["remove_button"],
+  valueField: "value",
+  labelField: "text",
+  searchField: ["text"],
+  options: [],
+  create: false,
+  maxOptions: null,
+  placeholder: "Rechercher un segment..."
+});
+
+// Init Tom Select for goals (multi-select with search)
+var goalsTomSelect = new TomSelect("#goal_ids", {
+  plugins: ["remove_button"],
+  valueField: "value",
+  labelField: "text",
+  searchField: ["text"],
+  options: [],
+  create: false,
+  maxOptions: null,
+  placeholder: "Rechercher un goal..."
+});
+
+function populatePageGroups(selectedMappingId) {
+  var currentVal = pageGroupSelect.value;
+  pageGroupSelect.innerHTML = '<option value="">Tous (aucun filtre)</option>';
+  var filtered = allPageGroups.filter(function(pg) {
+    return String(pg.mapping_id) === String(selectedMappingId);
+  });
+  filtered.sort(function(a, b) { return a.name.localeCompare(b.name); });
+  filtered.forEach(function(pg) {
+    var opt = document.createElement("option");
+    opt.value = pg.id;
+    opt.textContent = pg.name + " - " + pg.id;
+    pageGroupSelect.appendChild(opt);
+  });
+  if (initialPageGroupId) {
+    pageGroupSelect.value = initialPageGroupId;
+    initialPageGroupId = "";
+  } else {
+    pageGroupSelect.value = currentVal || "";
+  }
+}
+
+mappingSelect.addEventListener("change", function() {
+  populatePageGroups(mappingSelect.value);
+});
+
+function loadOptions(refresh) {
+  var url = "/api/options" + (refresh ? "?refresh=1" : "");
+  mappingSelect.innerHTML = '<option value="">Chargement...</option>';
+  pageGroupSelect.innerHTML = '<option value="">Chargement...</option>';
+  fetch(url)
+    .then(function(res) { return res.json(); })
+    .then(function(data) {
+      if (data.error) { console.error(data.error); return; }
+
+      // Mappings
+      mappingSelect.innerHTML = "";
+      data.mappings.sort(function(a, b) { return a.name.localeCompare(b.name); });
+      data.mappings.forEach(function(m) {
+        var opt = document.createElement("option");
+        opt.value = m.id;
+        opt.textContent = m.name + " - " + m.id;
+        mappingSelect.appendChild(opt);
+      });
+      if (initialMappingId) {
+        mappingSelect.value = initialMappingId;
+      }
+
+      // Page groups
+      allPageGroups = data.page_groups;
+      populatePageGroups(mappingSelect.value);
+
+      // Segments
+      if (data.segments) {
+        var savedSegments = segmentsTomSelect.items.slice();
+        segmentsTomSelect.clear(true);
+        segmentsTomSelect.clearOptions();
+        data.segments.sort(function(a, b) { return a.name.localeCompare(b.name); });
+        data.segments.forEach(function(s) {
+          segmentsTomSelect.addOption({ value: String(s.id), text: s.name + " - " + s.id });
+        });
+        var toSelect = savedSegments.length ? savedSegments : initialSegmentIds.map(String);
+        toSelect.forEach(function(v) { segmentsTomSelect.addItem(v, true); });
+        segmentsTomSelect.refreshOptions(false);
+      }
+
+      // Goals
+      if (data.goals) {
+        var savedGoals = goalsTomSelect.items.slice();
+        goalsTomSelect.clear(true);
+        goalsTomSelect.clearOptions();
+        data.goals.sort(function(a, b) { return a.name.localeCompare(b.name); });
+        data.goals.forEach(function(g) {
+          goalsTomSelect.addOption({ value: String(g.id), text: g.name + " - " + g.id });
+        });
+        var toSelectGoals = savedGoals.length ? savedGoals : initialGoalIds.map(String);
+        toSelectGoals.forEach(function(v) { goalsTomSelect.addItem(v, true); });
+        goalsTomSelect.refreshOptions(false);
+      }
+    })
+    .catch(function(err) {
+      console.error("Erreur chargement options:", err);
+      mappingSelect.innerHTML = '<option value="">Erreur de chargement</option>';
+    });
+}
+
+loadOptions(false);
+
+document.getElementById("refresh-options-btn").addEventListener("click", function() {
+  initialMappingId = mappingSelect.value;
+  initialPageGroupId = pageGroupSelect.value;
+  loadOptions(true);
+});
+
 var runBtn = document.getElementById("run-btn");
 var resultCard = document.getElementById("result-card");
 var statusBadge = document.getElementById("status-badge");
@@ -243,11 +409,11 @@ runBtn.addEventListener("click", function() {
   var payload = {
     start_date: document.getElementById("start_date").value,
     end_date: document.getElementById("end_date").value,
-    segment_ids: document.getElementById("segment_ids").value,
+    segment_ids: segmentsTomSelect.items.join(", "),
     by_device: document.getElementById("by_device").checked,
     page_group_id: document.getElementById("page_group_id").value,
     mapping_id: document.getElementById("mapping_id").value,
-    goal_ids: document.getElementById("goal_ids").value
+    goal_ids: goalsTomSelect.items.join(", ")
   };
 
   fetch("/run", {
