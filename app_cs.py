@@ -722,7 +722,12 @@ def apply_reference_coloring_on_pivot(ws, reference_segment_id):
         if not is_numeric(ref_value):
             continue
         metric_name = ws.cell(row=row_idx, column=metric_name_column).value if metric_name_column else None
-        reverse_coloring = metric_name == "bounceRate"
+        reverse_coloring = metric_name in (
+            "bounceRate", "exitRate", "loadingTime",
+            "largestContentfulPaint", "cumulativeLayoutShift",
+            "interactionToNextPaint", "firstInputDelay",
+            "firstContentfulPaint", "timeToFirstByte",
+        )
 
         for col_idx in compare_columns + delta_columns:
             value_cell = ws.cell(row=row_idx, column=col_idx)
@@ -795,14 +800,35 @@ def insert_delta_formulas(ws, key_fields_count, segment_order, reference_segment
 
 
 METRIC_NUMBER_FORMATS = {
-    "bounceRate":           '0.00"%"',
-    "cartAverage":          '#,##0.00 "€"',
-    "pageviewAverage":      "0.00",
-    "revenueSum":           '#,##0.00 "€"',
-    "sessionTimeAverage":   "0.00",
-    "conversionCount":      "#,##0",
-    "conversionRate":       '0.00"%"',
-    "visits":               "#,##0",
+    # Site-wide metrics
+    "bounceRate":               '0.00"%"',
+    "cartAverage":              '#,##0.00 "€"',
+    "pageviewAverage":          "0.00",
+    "revenueSum":               '#,##0.00 "€"',
+    "sessionTimeAverage":       "0.00",
+    "conversionCount":          "#,##0",
+    "conversionRate":           '0.00"%"',
+    "visits":                   "#,##0",
+    # Page-group metrics
+    "activityRate":             '0.00"%"',
+    "exitRate":                 '0.00"%"',
+    "landingRate":              '0.00"%"',
+    "scrollRate":               '0.00"%"',
+    "uniqueVisits":             "#,##0",
+    "views":                    "#,##0",
+    "viewsVisits":              "0.00",
+    "elapsedTime":              "#,##0",
+    "interactionTime":          "#,##0",
+    # Web Vitals
+    "cumulativeLayoutShift":    "0.000",
+    "firstContentfulPaint":     "#,##0",
+    "firstInputDelay":          "#,##0",
+    "interactionToNextPaint":   "#,##0",
+    "largestContentfulPaint":   "#,##0",
+    "loadingTime":              "#,##0.00",
+    "timeToFirstByte":          "#,##0",
+    "foldHeight":               "#,##0",
+    "pageHeight":               "#,##0",
 }
 
 DELTA_NUMBER_FORMAT = "0.00%"
